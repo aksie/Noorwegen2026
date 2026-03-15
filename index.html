@@ -496,6 +496,110 @@
   .badge-flam   { background: rgba(25,118,210,.12); color: #0d47a1; }
   .badge-oslo   { background: rgba(191,54,12,.12);  color: #bf360c; }
 
+  /* ── LANDING PAGE ────────────────────────────────────────────── */
+  .landing-page {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .landing-page.hidden {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .8s ease;
+  }
+  .landing-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.06);
+    animation: landingZoom 12s ease forwards;
+  }
+  @keyframes landingZoom {
+    from { transform: scale(1.06); }
+    to   { transform: scale(1.0); }
+  }
+  .landing-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(10,25,35,.55) 0%,
+      rgba(10,25,35,.2) 50%,
+      rgba(10,25,35,.7) 100%
+    );
+  }
+  .landing-content {
+    position: relative;
+    text-align: center;
+    padding: 40px;
+    animation: landingFadeUp .9s ease .3s both;
+  }
+  @keyframes landingFadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .landing-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: .9;
+  }
+  .landing-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(64px, 12vw, 120px);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 40px rgba(0,0,0,.4);
+  }
+  .landing-sub {
+    margin-top: 20px;
+    font-size: 15px;
+    color: rgba(255,255,255,.65);
+    font-weight: 300;
+    letter-spacing: .5px;
+  }
+  .landing-cta {
+    margin-top: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    border: 1.5px solid rgba(255,255,255,.35);
+    border-radius: 40px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    backdrop-filter: blur(8px);
+    background: rgba(255,255,255,.08);
+    transition: all .25s;
+    animation: landingFadeUp .9s ease .7s both;
+  }
+  .landing-cta:hover {
+    background: rgba(255,255,255,.18);
+    border-color: rgba(255,255,255,.6);
+  }
+  .landing-cta svg {
+    animation: bounce 1.8s ease infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(4px); }
+  }
+
   @media (max-width: 768px) {
     .sidebar { width: 100%; max-width: 320px; }
     .sidebar.collapsed { transform: translateX(-100%); }
@@ -510,6 +614,21 @@
 </style>
 </head>
 <body>
+
+<!-- Landing page -->
+<div class="landing-page" id="landing" onclick="enterSite()">
+  <img class="landing-bg" src="images/noorwegen.jpg" alt="Noorwegen" onerror="this.src='images/Bjornafjorden.png">
+  <div class="landing-overlay"></div>
+  <div class="landing-content">
+    <div class="landing-eyebrow">Zomer 2026 &nbsp;·&nbsp; 3 personen</div>
+    <div class="landing-title">Noorwegen</div>
+    <div class="landing-sub">4 juli – 26 juli &nbsp;·&nbsp; Bergen · Baldersheim · Vik · Flåm · Oslo</div>
+    <div class="landing-cta">
+      Begin de reis
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+    </div>
+  </div>
+</div>
 
 <!-- Sidebar overlay (mobile) -->
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -578,7 +697,7 @@ const days = [
     },
     activities: "Vertrek Amsterdam vroeg. Rijden naar Hamburg (~5 uur). Middag en avond Hamburg verkennen: de <strong>Speicherstadt</strong> (UNESCO historisch havendistrict), de <strong>Reeperbahn</strong> en een wandeling langs de <strong>Alster</strong>.",
     moreLink: null,
-    heroImage: "images/auto_01.jpg,
+    heroImage: "images/auto_01.jpg",
     heroAlt: "Hamburg Speicherstadt"
   },
   {
@@ -627,7 +746,7 @@ const days = [
     },
     activities: "Aankomst Bergen ~13:00. Inchecken hotel. 's Middags een eerste verkenning van <strong>Bryggen</strong> — de kleurrijke UNESCO-hanzehuizen aan de haven. Ga na 17:00 voor minder drukte. Avondeten in de haven.",
     moreLink: null,
-    heroImage: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1600&q=80",
+    heroImage: "images/Bergen.jpg",
     heroAlt: "Bergen Bryggen"
   },
   {
@@ -650,7 +769,7 @@ const days = [
     },
     activities: "Ochtend: <strong>Ulrikenbanen kabelbaan</strong> naar Bergen's hoogste berg (643m) — er is een restaurant aan de top. Middag: <strong>Old Bergen Museum</strong> met meer dan 50 historische houten huizen en acteurs in 19e-eeuwse kostuums. Avond: <strong>Troldhaugen</strong>, het prachtige huis van componist Edvard Grieg met uitzicht over het Nordåsmeer.",
     moreLink: null,
-    heroImage: "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=1600&q=80",
+    heroImage: "images/Bergen.jpg",
     heroAlt: "Bergen berglandschap"
   },
   {
@@ -912,7 +1031,7 @@ const days = [
     },
     activities: "<strong>Nærøyfjord cruise</strong> met het stille, elektrische schip <em>Future of the Fjords</em>. Twee uur varen door de UNESCO-beschermde smalle fjord van Flåm naar Gudvangen. Optie: in Gudvangen uitstappen voor een bezoek aan het Vikingdorp <strong>Njardarheimr</strong> en het spectaculaire uitzicht vanaf het Stalheim Hotel.",
     moreLink: "https://www.norwaysbest.com/en/flam/things-to-do",
-    heroImage: "/images/Flam.png",
+    heroImage: "images/Flam.png",
     heroAlt: "Nærøyfjord cruise"
   },
   {
@@ -1119,8 +1238,14 @@ const phaseGroups = [
 // BUILD UI
 // ────────────────────────────────────────────────────────────────────────────
 let currentDay = 0;
-let sidebarOpen = true;
+let sidebarOpen = false;
 let currentView = "dates";
+
+function enterSite() {
+  const landing = document.getElementById("landing");
+  landing.classList.add("hidden");
+  setTimeout(() => landing.style.display = "none", 800);
+}
 
 function buildSidebar() {
   const datesEl = document.getElementById("view-dates");
@@ -1316,9 +1441,11 @@ function closeSidebar() {
   document.getElementById("overlay").classList.remove("show");
 }
 
-// Init
+// Init — start with sidebar collapsed
 buildSidebar();
 buildMain();
+document.getElementById("sidebar").classList.add("collapsed");
+document.getElementById("main").classList.add("expanded");
 </script>
 </body>
 </html>

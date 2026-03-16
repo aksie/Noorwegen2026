@@ -22,583 +22,137 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--snow); color: var(--ink); overflow-x: hidden; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--snow);
-    color: var(--ink);
-    overflow-x: hidden;
-  }
-
-  /* ── SIDEBAR ─────────────────────────────────────────────────── */
-  .sidebar {
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    width: var(--sidebar-w);
-    background: var(--fjord);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    transform: translateX(0);
-    transition: transform .35s cubic-bezier(.4,0,.2,1);
-    overflow: hidden;
-  }
+  /* SIDEBAR */
+  .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w); background: var(--fjord); z-index: 100; display: flex; flex-direction: column; transform: translateX(0); transition: transform .35s cubic-bezier(.4,0,.2,1); overflow: hidden; }
   .sidebar.collapsed { transform: translateX(-100%); }
-
-  .sidebar-header {
-    padding: 28px 24px 20px;
-    border-bottom: 1px solid rgba(255,255,255,.08);
-    flex-shrink: 0;
-  }
-  .sidebar-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    color: #fff;
-    letter-spacing: .5px;
-    line-height: 1.3;
-  }
-  .sidebar-sub {
-    font-size: 11px;
-    color: rgba(255,255,255,.45);
-    margin-top: 4px;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  /* Toggle row */
-  .view-toggle {
-    display: flex;
-    margin: 16px 24px 0;
-    background: rgba(255,255,255,.08);
-    border-radius: 8px;
-    padding: 3px;
-  }
-  .vt-btn {
-    flex: 1;
-    border: none;
-    background: transparent;
-    color: rgba(255,255,255,.5);
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-    padding: 7px 4px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all .2s;
-  }
-  .vt-btn.active {
-    background: var(--gold);
-    color: var(--fjord);
-    font-weight: 500;
-  }
-
-  .sidebar-nav {
-    flex: 1;
-    overflow-y: auto;
-    padding: 12px 0 24px;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255,255,255,.1) transparent;
-  }
+  .sidebar-header { padding: 28px 24px 20px; border-bottom: 1px solid rgba(255,255,255,.08); flex-shrink: 0; }
+  .sidebar-logo { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; letter-spacing: .5px; line-height: 1.3; }
+  .sidebar-sub { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 4px; font-family: 'DM Mono', monospace; letter-spacing: 1px; text-transform: uppercase; }
+  .view-toggle { display: flex; margin: 16px 24px 0; background: rgba(255,255,255,.08); border-radius: 8px; padding: 3px; }
+  .vt-btn { flex: 1; border: none; background: transparent; color: rgba(255,255,255,.5); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .8px; text-transform: uppercase; padding: 7px 4px; border-radius: 6px; cursor: pointer; transition: all .2s; }
+  .vt-btn.active { background: var(--gold); color: var(--fjord); font-weight: 500; }
+  .sidebar-nav { flex: 1; overflow-y: auto; padding: 12px 0 24px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.1) transparent; }
   .sidebar-nav::-webkit-scrollbar { width: 4px; }
   .sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 4px; }
-
-  /* Phase grouping */
-  .nav-phase {
-    padding: 18px 24px 6px;
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: .8;
-  }
-
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 24px;
-    cursor: pointer;
-    transition: background .15s;
-    border-left: 3px solid transparent;
-    text-decoration: none;
-  }
+  .nav-phase { padding: 18px 24px 6px; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); opacity: .8; }
+  .nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 24px; cursor: pointer; transition: background .15s; border-left: 3px solid transparent; text-decoration: none; }
   .nav-item:hover { background: rgba(255,255,255,.05); }
-  .nav-item.active {
-    background: rgba(200,151,58,.12);
-    border-left-color: var(--gold);
-  }
-  .nav-day-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: rgba(255,255,255,.3);
-    width: 18px;
-    flex-shrink: 0;
-  }
+  .nav-item.active { background: rgba(200,151,58,.12); border-left-color: var(--gold); }
+  .nav-day-num { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,.3); width: 18px; flex-shrink: 0; }
   .nav-item.active .nav-day-num { color: var(--gold); }
-  .nav-date {
-    font-size: 12px;
-    color: rgba(255,255,255,.75);
-    font-weight: 400;
-    white-space: nowrap;
-  }
+  .nav-date { font-size: 12px; color: rgba(255,255,255,.75); font-weight: 400; white-space: nowrap; }
   .nav-item.active .nav-date { color: #fff; font-weight: 500; }
-  .nav-loc {
-    font-size: 10px;
-    color: rgba(255,255,255,.3);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* destination view  */
-  .dest-group {
-    padding: 8px 16px;
-  }
-  .dest-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    border: none;
-    background: transparent;
-    padding: 10px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: left;
-    transition: background .15s;
-    border-left: 3px solid transparent;
-  }
+  .nav-loc { font-size: 10px; color: rgba(255,255,255,.3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dest-group { padding: 8px 16px; }
+  .dest-btn { display: flex; align-items: center; gap: 10px; width: 100%; border: none; background: transparent; padding: 10px 12px; border-radius: 8px; cursor: pointer; text-align: left; transition: background .15s; border-left: 3px solid transparent; }
   .dest-btn:hover { background: rgba(255,255,255,.06); }
-  .dest-btn.active {
-    background: rgba(200,151,58,.12);
-    border-left-color: var(--gold);
-  }
-  .dest-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .dest-name {
-    font-size: 13px;
-    color: rgba(255,255,255,.8);
-    font-weight: 500;
-  }
+  .dest-btn.active { background: rgba(200,151,58,.12); border-left-color: var(--gold); }
+  .dest-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dest-name { font-size: 13px; color: rgba(255,255,255,.8); font-weight: 500; }
   .dest-btn.active .dest-name { color: #fff; }
-  .dest-dates {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    color: rgba(255,255,255,.3);
-    margin-top: 2px;
-  }
+  .dest-dates { font-family: 'DM Mono', monospace; font-size: 9px; color: rgba(255,255,255,.3); margin-top: 2px; }
 
-  /* ── HAMBURGER ───────────────────────────────────────────────── */
-  .hamburger {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 200;
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    border: none;
-    background: var(--fjord);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    transition: all .2s;
-    box-shadow: 0 4px 16px rgba(26,58,74,.3);
-  }
+  /* HAMBURGER */
+  .hamburger { position: fixed; top: 20px; left: 20px; z-index: 200; width: 44px; height: 44px; border-radius: 10px; border: none; background: var(--fjord); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; transition: all .2s; box-shadow: 0 4px 16px rgba(26,58,74,.3); }
   .hamburger.open { background: var(--fjord-mid); left: calc(var(--sidebar-w) + 12px); }
-  .hamburger span {
-    display: block;
-    width: 18px; height: 2px;
-    background: #fff;
-    border-radius: 2px;
-    transition: all .25s;
-  }
+  .hamburger span { display: block; width: 18px; height: 2px; background: #fff; border-radius: 2px; transition: all .25s; }
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── MAIN CONTENT ────────────────────────────────────────────── */
-  .main {
-    margin-left: var(--sidebar-w);
-    min-height: 100vh;
-    transition: margin-left .35s cubic-bezier(.4,0,.2,1);
-  }
+  /* MAIN */
+  .main { margin-left: var(--sidebar-w); min-height: 100vh; transition: margin-left .35s cubic-bezier(.4,0,.2,1); }
   .main.expanded { margin-left: 0; }
-
-  /* ── DAY PAGE ────────────────────────────────────────────────── */
   .day-page { display: none; }
   .day-page.active { display: block; }
 
-  /* Hero */
-  .hero {
-    position: relative;
-    height: 480px;
-    overflow: hidden;
-  }
-  .hero-img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 8s ease;
-  }
+  /* HERO */
+  .hero { position: relative; height: 480px; overflow: hidden; }
+  .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 8s ease; }
   .hero:hover .hero-img { transform: scale(1.04); }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,50,66,.15) 0%, rgba(26,50,66,.05) 40%, rgba(26,50,66,.6) 75%, rgba(26,50,66,.9) 100%); }
+  .hero-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 0 56px 40px; }
+  .hero-day-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .hero-place { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 56px); color: #fff; line-height: 1.1; text-shadow: 0 2px 20px rgba(0,0,0,.3); }
+  .hero-phase-badge { display: inline-block; margin-top: 14px; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 500; letter-spacing: .5px; }
 
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(26,50,66,.15) 0%,
-      rgba(26,50,66,.05) 40%,
-      rgba(26,50,66,.6) 75%,
-      rgba(26,50,66,.9) 100%
-    );
-  }
-  .hero-content {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    padding: 0 56px 40px;
-  }
-  .hero-day-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-  }
-  .hero-place {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 5vw, 56px);
-    color: #fff;
-    line-height: 1.1;
-    text-shadow: 0 2px 20px rgba(0,0,0,.3);
-  }
-  .hero-phase-badge {
-    display: inline-block;
-    margin-top: 14px;
-    padding: 5px 14px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .5px;
-  }
+  /* HERO NEXT */
+  .hero-next { position: absolute; bottom: 40px; right: 48px; display: flex; align-items: center; gap: 7px; color: rgba(255,255,255,.8); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border: none; background: rgba(255,255,255,.1); backdrop-filter: blur(8px); padding: 8px 16px 8px 14px; border-radius: 24px; border: 1px solid rgba(255,255,255,.25); transition: all .2s; }
+  .hero-next:hover { background: rgba(255,255,255,.22); color: #fff; border-color: rgba(255,255,255,.5); transform: translateX(3px); }
+  .hero-next svg { transition: transform .2s; }
+  .hero-next:hover svg { transform: translateX(3px); }
 
-  /* Content below hero */
-  .day-content {
-    max-width: 860px;
-    padding: 48px 56px 80px;
-  }
-
-  /* Accommodation card */
-  .accom-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 28px 32px;
-    margin-bottom: 40px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 32px rgba(0,0,0,.05);
-    border: 1px solid rgba(0,0,0,.06);
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-  }
-  .accom-icon {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
+  /* DAY CONTENT */
+  .day-content { max-width: 860px; padding: 48px 56px 80px; }
+  .accom-card { background: #fff; border-radius: 16px; padding: 28px 32px; margin-bottom: 40px; box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 8px 32px rgba(0,0,0,.05); border: 1px solid rgba(0,0,0,.06); display: flex; gap: 20px; align-items: flex-start; }
+  .accom-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
   .accom-body {}
-  .accom-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--fjord);
-    text-decoration: none;
-    display: inline-block;
-    border-bottom: 2px solid transparent;
-    transition: border-color .2s;
-    line-height: 1.3;
-  }
+  .accom-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--fjord); text-decoration: none; display: inline-block; border-bottom: 2px solid transparent; transition: border-color .2s; line-height: 1.3; }
   .accom-name:hover { border-bottom-color: var(--gold); }
-  .accom-type {
-    font-size: 11px;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--rock);
-    margin-bottom: 6px;
-  }
-  .accom-address {
-    margin-top: 8px;
-    font-size: 13px;
-    color: var(--rock);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    transition: color .2s;
-  }
+  .accom-type { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 1px; text-transform: uppercase; color: var(--rock); margin-bottom: 6px; }
+  .accom-address { margin-top: 8px; font-size: 13px; color: var(--rock); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: color .2s; }
   .accom-address:hover { color: var(--fjord); }
   .accom-address svg { flex-shrink: 0; }
-
-  /* Journey card (for travel days) */
-  .journey-card {
-    background: var(--fjord);
-    border-radius: 16px;
-    padding: 28px 32px;
-    margin-bottom: 40px;
-    color: #fff;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  .journey-route {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: #fff;
-  }
-  .journey-arrow { color: var(--gold); font-size: 18px; margin: 0 8px; }
-  .journey-time {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,.5);
-    margin-top: 4px;
-    letter-spacing: .5px;
-  }
-  .journey-icon {
-    font-size: 36px;
-    flex-shrink: 0;
-  }
-
-  /* Section titles */
-  .section-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
-
-  /* Activities */
-  .activities-block {
-    margin-bottom: 36px;
-  }
-  .activity-text {
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--ink);
-    font-weight: 300;
-  }
-  .activity-text strong {
-    color: var(--fjord);
-    font-weight: 500;
-  }
-
-  .more-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 20px;
-    padding: 11px 20px;
-    border-radius: 8px;
-    background: var(--glacier);
-    color: var(--fjord);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all .2s;
-    border: 1px solid rgba(26,58,74,.08);
-  }
-  .more-link:hover {
-    background: var(--fjord);
-    color: #fff;
-  }
-
-  /* booking badge */
-  .booked-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 10px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    background: rgba(74,124,89,.1);
-    color: var(--moss);
-    font-size: 11px;
-    font-weight: 500;
-    font-family: 'DM Mono', monospace;
-  }
-
-  /* Travel info strip */
-  .travel-strip {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 36px;
-    flex-wrap: wrap;
-  }
-  .travel-chip {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: #fff;
-    border-radius: 10px;
-    border: 1px solid rgba(0,0,0,.07);
-    font-size: 13px;
-    box-shadow: 0 1px 4px rgba(0,0,0,.04);
-  }
+  .journey-card { background: var(--fjord); border-radius: 16px; padding: 28px 32px; margin-bottom: 40px; color: #fff; display: flex; gap: 20px; align-items: center; }
+  .journey-icon { font-size: 36px; flex-shrink: 0; }
+  .section-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .activities-block { margin-bottom: 36px; }
+  .activity-text { font-size: 16px; line-height: 1.75; color: var(--ink); font-weight: 300; }
+  .activity-text strong { color: var(--fjord); font-weight: 500; }
+  .more-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 11px 20px; border-radius: 8px; background: var(--glacier); color: var(--fjord); text-decoration: none; font-size: 13px; font-weight: 500; transition: all .2s; border: 1px solid rgba(26,58,74,.08); }
+  .more-link:hover { background: var(--fjord); color: #fff; }
+  .booked-badge { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; padding: 4px 10px; border-radius: 20px; background: rgba(74,124,89,.1); color: var(--moss); font-size: 11px; font-weight: 500; font-family: 'DM Mono', monospace; }
+  .travel-strip { display: flex; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
+  .travel-chip { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: #fff; border-radius: 10px; border: 1px solid rgba(0,0,0,.07); font-size: 13px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
   .travel-chip-icon { font-size: 16px; }
   .travel-chip-label { color: var(--rock); font-size: 11px; display: block; }
   .travel-chip-val { color: var(--ink); font-weight: 500; }
+  .divider { height: 1px; background: rgba(0,0,0,.07); margin: 36px 0; }
 
-  /* Divider */
-  .divider {
-    height: 1px;
-    background: rgba(0,0,0,.07);
-    margin: 36px 0;
-  }
+  /* BOTTOM NEXT */
+  .day-next-wrap { margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(0,0,0,.07); display: flex; justify-content: flex-end; }
+  .day-next { display: inline-flex; align-items: center; gap: 12px; padding: 14px 24px; background: var(--fjord); color: #fff; border: none; border-radius: 10px; cursor: pointer; transition: all .2s; text-align: left; }
+  .day-next:hover { background: var(--fjord-mid); transform: translateX(4px); }
+  .day-next svg { flex-shrink: 0; transition: transform .2s; }
+  .day-next:hover svg { transform: translateX(3px); }
+  .day-next-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.45); display: block; margin-bottom: 3px; }
+  .day-next-dest { font-size: 13px; color: #fff; font-weight: 500; display: block; }
 
-  /* Overlay for mobile */
-  .overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.4);
-    z-index: 90;
-  }
+  /* OVERLAY */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 90; }
   .overlay.show { display: block; }
 
-  /* Phase dot colors */
-  .phase-reis     { background: #607d8b; }
-  .phase-bergen   { background: #1565c0; }
-  .phase-bald     { background: #2e7d32; }
-  .phase-vik      { background: #6a1b9a; }
-  .phase-flam     { background: #1976d2; }
-  .phase-oslo     { background: #bf360c; }
+  /* PHASE COLORS */
+  .phase-reis   { background: #607d8b; }
+  .phase-bergen { background: #1565c0; }
+  .phase-bald   { background: #2e7d32; }
+  .phase-vik    { background: #6a1b9a; }
+  .phase-flam   { background: #1976d2; }
+  .phase-oslo   { background: #bf360c; }
+  .badge-reis   { background: rgba(96,125,139,.15);  color: #546e7a; }
+  .badge-bergen { background: rgba(21,101,192,.12);  color: #0d47a1; }
+  .badge-bald   { background: rgba(46,125,50,.12);   color: #1b5e20; }
+  .badge-vik    { background: rgba(106,27,154,.12);  color: #4a148c; }
+  .badge-flam   { background: rgba(25,118,210,.12);  color: #0d47a1; }
+  .badge-oslo   { background: rgba(191,54,12,.12);   color: #bf360c; }
 
-  .badge-reis   { background: rgba(96,125,139,.15); color: #546e7a; }
-  .badge-bergen { background: rgba(21,101,192,.12); color: #0d47a1; }
-  .badge-bald   { background: rgba(46,125,50,.12);  color: #1b5e20; }
-  .badge-vik    { background: rgba(106,27,154,.12); color: #4a148c; }
-  .badge-flam   { background: rgba(25,118,210,.12); color: #0d47a1; }
-  .badge-oslo   { background: rgba(191,54,12,.12);  color: #bf360c; }
-
-  /* ── LANDING PAGE ────────────────────────────────────────────── */
-  .landing-page {
-    position: fixed;
-    inset: 0;
-    z-index: 300;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .landing-page.hidden {
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .8s ease;
-  }
-  .landing-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transform: scale(1.06);
-    animation: landingZoom 12s ease forwards;
-  }
-  @keyframes landingZoom {
-    from { transform: scale(1.06); }
-    to   { transform: scale(1.0); }
-  }
-  .landing-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      160deg,
-      rgba(10,25,35,.55) 0%,
-      rgba(10,25,35,.2) 50%,
-      rgba(10,25,35,.7) 100%
-    );
-  }
-  .landing-content {
-    position: relative;
-    text-align: center;
-    padding: 40px;
-    animation: landingFadeUp .9s ease .3s both;
-  }
-  @keyframes landingFadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .landing-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-    opacity: .9;
-  }
-  .landing-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(64px, 12vw, 120px);
-    color: #fff;
-    line-height: 1;
-    letter-spacing: -1px;
-    text-shadow: 0 4px 40px rgba(0,0,0,.4);
-  }
-  .landing-sub {
-    margin-top: 20px;
-    font-size: 15px;
-    color: rgba(255,255,255,.65);
-    font-weight: 300;
-    letter-spacing: .5px;
-  }
-  .landing-cta {
-    margin-top: 48px;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    border: 1.5px solid rgba(255,255,255,.35);
-    border-radius: 40px;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-family: 'DM Mono', monospace;
-    backdrop-filter: blur(8px);
-    background: rgba(255,255,255,.08);
-    transition: all .25s;
-    animation: landingFadeUp .9s ease .7s both;
-  }
-  .landing-cta:hover {
-    background: rgba(255,255,255,.18);
-    border-color: rgba(255,255,255,.6);
-  }
-  .landing-cta svg {
-    animation: bounce 1.8s ease infinite;
-  }
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(4px); }
-  }
+  /* LANDING PAGE */
+  .landing-page { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; }
+  .landing-page.hidden { pointer-events: none; opacity: 0; transition: opacity .8s ease; }
+  .landing-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(1.06); animation: landingZoom 12s ease forwards; }
+  @keyframes landingZoom { from { transform: scale(1.06); } to { transform: scale(1.0); } }
+  .landing-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(10,25,35,.55) 0%, rgba(10,25,35,.2) 50%, rgba(10,25,35,.7) 100%); }
+  .landing-content { position: relative; text-align: center; padding: 40px; animation: landingFadeUp .9s ease .3s both; }
+  @keyframes landingFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .landing-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; opacity: .9; }
+  .landing-title { font-family: 'Playfair Display', serif; font-size: clamp(64px, 12vw, 120px); color: #fff; line-height: 1; letter-spacing: -1px; text-shadow: 0 4px 40px rgba(0,0,0,.4); }
+  .landing-sub { margin-top: 20px; font-size: 15px; color: rgba(255,255,255,.65); font-weight: 300; letter-spacing: .5px; }
+  .landing-cta { margin-top: 48px; display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; border: 1.5px solid rgba(255,255,255,.35); border-radius: 40px; color: #fff; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; font-family: 'DM Mono', monospace; backdrop-filter: blur(8px); background: rgba(255,255,255,.08); transition: all .25s; animation: landingFadeUp .9s ease .7s both; }
+  .landing-cta:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.6); }
+  .landing-cta svg { animation: bounce 1.8s ease infinite; }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 
   @media (max-width: 768px) {
     .sidebar { width: 100%; max-width: 320px; }
@@ -607,6 +161,7 @@
     .main { margin-left: 0 !important; }
     .hero { height: 360px; }
     .hero-content { padding: 0 28px 28px; }
+    .hero-next { right: 20px; bottom: 20px; font-size: 10px; padding: 7px 13px; }
     .day-content { padding: 32px 28px 60px; }
     .accom-card { flex-direction: column; }
     .journey-card { flex-direction: column; gap: 8px; }
@@ -615,9 +170,8 @@
 </head>
 <body>
 
-<!-- Landing page -->
 <div class="landing-page" id="landing" onclick="enterSite()">
-  <img class="landing-bg" src="images/noorwegen.jpg" alt="Noorwegen" onerror="this.src='images/Bjornafjorden.png">
+  <img class="landing-bg" src="images/noorwegen.jpg" alt="Noorwegen" onerror="this.src='images/Bjornafjorden.png'">
   <div class="landing-overlay"></div>
   <div class="landing-content">
     <div class="landing-eyebrow">Zomer 2026 &nbsp;·&nbsp; 3 personen</div>
@@ -630,613 +184,75 @@
   </div>
 </div>
 
-<!-- Sidebar overlay (mobile) -->
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<!-- Hamburger -->
 <button class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="Menu">
   <span></span><span></span><span></span>
 </button>
 
-<!-- Sidebar -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">Noorwegen<br><em style="font-style:italic;color:rgba(255,255,255,.6)">Zomer 2026</em></div>
     <div class="sidebar-sub">4 jul – 26 jul · 3 personen</div>
   </div>
-
-  <!-- Toggle -->
   <div style="padding:12px 16px 0;">
     <div class="view-toggle">
       <button class="vt-btn active" id="btn-dates" onclick="switchView('dates')">Data</button>
       <button class="vt-btn" id="btn-dests" onclick="switchView('dests')">Bestemmingen</button>
     </div>
   </div>
-
-  <!-- Dates view -->
-  <div class="sidebar-nav" id="view-dates">
-    <!-- Dynamically filled by JS -->
-  </div>
-
-  <!-- Destinations view -->
-  <div class="sidebar-nav" id="view-dests" style="display:none;">
-    <!-- Dynamically filled by JS -->
-  </div>
+  <div class="sidebar-nav" id="view-dates"></div>
+  <div class="sidebar-nav" id="view-dests" style="display:none;"></div>
 </nav>
 
-<!-- Main content -->
-<main class="main" id="main">
-  <!-- Day pages filled by JS -->
-</main>
+<main class="main" id="main"></main>
 
 <script>
-// ────────────────────────────────────────────────────────────────────────────
-// DATA
-// ────────────────────────────────────────────────────────────────────────────
 const days = [
-  {
-    id: 0,
-    date: "Sat Jul 4",
-    weekday: "Saturday",
-    dateShort: "4 jul",
-    phase: "reis",
-    phaseLabel: "Reisdag",
-    place: "Amsterdam → Hamburg",
-    isTravel: true,
-    travelIcon: "🚗",
-    travelTime: "~5 uur",
-    travelLink: null,
-    accom: {
-      type: "Hotel",
-      name: "Hotel Hamburg",
-      url: "https://booking.com",
-      address: "Hamburg, Duitsland",
-      mapsUrl: "https://maps.google.com/?q=Hamburg+Germany",
-      icon: "🏨",
-      booked: false
-    },
-    activities: "Vertrek Amsterdam vroeg. Rijden naar Hamburg (~5 uur). Middag en avond Hamburg verkennen: de <strong>Speicherstadt</strong> (UNESCO historisch havendistrict), de <strong>Reeperbahn</strong> en een wandeling langs de <strong>Alster</strong>.",
-    moreLink: null,
-    heroImage: "images/auto_01.jpg",
-    heroAlt: "Hamburg Speicherstadt"
-  },
-  {
-    id: 1,
-    date: "Sun Jul 5",
-    weekday: "Sunday",
-    dateShort: "5 jul",
-    phase: "reis",
-    phaseLabel: "Reisdag",
-    place: "Hamburg → Bergen",
-    isTravel: true,
-    travelIcon: "⛴️",
-    travelTime: "~4.5u rijden + boot ~19u",
-    travelLink: "https://fjordline.com/en/p/our-ferry-routes/hirtshals-stavanger-bergen",
-    accom: {
-      type: "Fjord Line Ferry",
-      name: "Fjord Line · Hirtshals → Bergen",
-      url: "https://fjordline.com/en/p/our-ferry-routes/hirtshals-stavanger-bergen",
-      address: "Hirtshals, Denemarken → Bergen, Noorwegen",
-      mapsUrl: "https://maps.google.com/?q=Hirtshals+Ferry+Terminal",
-      icon: "⛴️",
-      booked: true
-    },
-    activities: "Vroeg vertrek Hamburg. Rijden naar <strong>Hirtshals</strong> (~4,5 uur). Inchecken Fjord Line — houd rekening met 2 uur voor vertrek voor check-in met auto. De ferry vertrekt rond <strong>19:15</strong> en arriveert de volgende ochtend om ~13:00 in Bergen.",
-    moreLink: null,
-    heroImage: "images/bergenferry.jpg",
-    heroAlt: "Ferry Noorwegen"
-  },
-  {
-    id: 2,
-    date: "Mon Jul 6",
-    weekday: "Monday",
-    dateShort: "6 jul",
-    phase: "bergen",
-    phaseLabel: "Bergen",
-    place: "Bergen",
-    isTravel: false,
-    accom: {
-      type: "Hotel",
-      name: "Hotel Bergen",
-      url: "https://www.booking.com/Share-VAw8bjm",
-      address: "Strandgaten 190, Bergen City Centre, Bergen 5817",
-      mapsUrl: "https://maps.google.com/?q=Strandgaten+190,+Bergen,+Norway",
-      icon: "🏨",
-      booked: false
-    },
-    activities: "Aankomst Bergen ~13:00. Inchecken hotel. 's Middags een eerste verkenning van <strong>Bryggen</strong> — de kleurrijke UNESCO-hanzehuizen aan de haven. Ga na 17:00 voor minder drukte. Avondeten in de haven.",
-    moreLink: null,
-    heroImage: "images/Bergen.jpg",
-    heroAlt: "Bergen Bryggen"
-  },
-  {
-    id: 3,
-    date: "Tue Jul 7",
-    weekday: "Tuesday",
-    dateShort: "7 jul",
-    phase: "bergen",
-    phaseLabel: "Bergen",
-    place: "Bergen",
-    isTravel: false,
-    accom: {
-      type: "Hotel",
-      name: "Hotel Bergen",
-      url: "https://www.booking.com/Share-VAw8bjm",
-      address: "Strandgaten 190, Bergen City Centre, Bergen 5817",
-      mapsUrl: "https://maps.google.com/?q=Strandgaten+190,+Bergen,+Norway",
-      icon: "🏨",
-      booked: false
-    },
-    activities: "Ochtend: <strong>Ulrikenbanen kabelbaan</strong> naar Bergen's hoogste berg (643m) — er is een restaurant aan de top. Middag: <strong>Old Bergen Museum</strong> met meer dan 50 historische houten huizen en acteurs in 19e-eeuwse kostuums. Avond: <strong>Troldhaugen</strong>, het prachtige huis van componist Edvard Grieg met uitzicht over het Nordåsmeer.",
-    moreLink: null,
-    heroImage: "images/Bergen.jpg",
-    heroAlt: "Bergen berglandschap"
-  },
-  {
-    id: 4,
-    date: "Wed Jul 8",
-    weekday: "Wednesday",
-    dateShort: "8 jul",
-    phase: "reis",
-    phaseLabel: "Reisdag",
-    place: "Bergen → Baldersheim",
-    isTravel: true,
-    travelIcon: "🚗",
-    travelTime: "~1.5 uur",
-    travelLink: null,
-    accom: {
-      type: "Airbnb · Oud bakkerij",
-      name: "Huisje Baldersheim (oude bakkerij)",
-      url: "https://www.airbnb.co.uk/rooms/1064997542896120673",
-      address: "Årvikvegen 35, 5647 Baldersheim, Norway",
-      mapsUrl: "https://maps.google.com/?q=Årvikvegen+35,+5647+Baldersheim,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "Rijdag ~1,5 uur van Bergen. Optionele tussenstop bij de middeleeuwse <strong>Lysekloster kloosterruïne</strong>. Inchecken in het huisje in de oude bakkerij aan het Bjørnafjord.",
-    moreLink: null,
-    heroImage: "images/Bjornafjorden.png",
-    heroAlt: "Noors fjordlandschap"
-  },
-  {
-    id: 5,
-    date: "Thu Jul 9",
-    weekday: "Thursday",
-    dateShort: "9 jul",
-    phase: "bald",
-    phaseLabel: "Baldersheim",
-    place: "Bjørnafjorden",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Oud bakkerij",
-      name: "Huisje Baldersheim (oude bakkerij)",
-      url: "https://www.airbnb.co.uk/rooms/1064997542896120673",
-      address: "Årvikvegen 35, 5647 Baldersheim, Norway",
-      mapsUrl: "https://maps.google.com/?q=Årvikvegen+35,+5647+Baldersheim,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "Rustdag aan het brede, stille Bjørnafjord. Wandelen langs het water, zwemmen, de haven van <strong>Osøyro</strong> verkennen. 's Avonds barbecueën op het terras met uitzicht over het fjord.",
-    moreLink: null,
-    heroImage: "images/Bjornafjorden.png",
-    heroAlt: "Noors fjord zonsondergang"
-  },
-  {
-    id: 6,
-    date: "Fri Jul 10",
-    weekday: "Friday",
-    dateShort: "10 jul",
-    phase: "bald",
-    phaseLabel: "Baldersheim",
-    place: "Bjørnafjorden",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Oud bakkerij",
-      name: "Huisje Baldersheim (oude bakkerij)",
-      url: "https://www.airbnb.co.uk/rooms/1064997542896120673",
-      address: "Årvikvegen 35, 5647 Baldersheim, Norway",
-      mapsUrl: "https://maps.google.com/?q=Årvikvegen+35,+5647+Baldersheim,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "Dagtocht naar het eiland <strong>Lysøen</strong> — het buitenverblijf van de beroemde Noorse violist Ole Bull. Een bootje brengt je naar het eiland met zijn Moorse villa en rustig natuurreservaat. Weinig bezocht, indrukwekkend mooi.",
-    moreLink: "https://lysoen.no",
-    heroImage: "images/Bjornafjorden.png",
-    heroAlt: "Noors eiland"
-  },
-  {
-    id: 7,
-    date: "Sat Jul 11",
-    weekday: "Saturday",
-    dateShort: "11 jul",
-    phase: "bald",
-    phaseLabel: "Baldersheim",
-    place: "Hardangerfjord (dagtocht)",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Oud bakkerij",
-      name: "Huisje Baldersheim (oude bakkerij)",
-      url: "https://www.airbnb.co.uk/rooms/1064997542896120673",
-      address: "Årvikvegen 35, 5647 Baldersheim, Norway",
-      mapsUrl: "https://maps.google.com/?q=Årvikvegen+35,+5647+Baldersheim,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "Dagtocht naar het <strong>Hardangerfjord</strong> (~1u rijden via Norheimsund). Tussenstop <strong>Stegastein uitkijkpunt</strong> (650m boven het fjord). Verder naar <strong>Eidfjord</strong> en de iconische <strong>Vøringsfossen</strong> waterval. Optioneel: fjordcruise boot vanaf Norheimsund (vertrek 09:00, terug 18:15).",
-    moreLink: "https://www.norled.no/en/fjordcruise/hardangerfjord-from-norheimsund/",
-    heroImage: "images/Bjornafjorden.png",
-    heroAlt: "Hardangerfjord waterval"
-  },
-  {
-    id: 8,
-    date: "Sun Jul 12",
-    weekday: "Sunday",
-    dateShort: "12 jul",
-    phase: "reis",
-    phaseLabel: "Reisdag",
-    place: "Baldersheim → Vik",
-    isTravel: true,
-    travelIcon: "🚗",
-    travelTime: "~3.5 uur via Lærdal",
-    travelLink: null,
-    accom: {
-      type: "Airbnb · Huisje",
-      name: "Huisje Vik (Sognefjord)",
-      url: "https://www.airbnb.com/l/eJeobn4n",
-      address: "Vangsnesvegen 576, Vik, Vestland 6894, Norway",
-      mapsUrl: "https://maps.google.com/?q=Vangsnesvegen+576,+Vik,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "Rijdag ~3,5 uur via het Lærdal-dal. Tussenstop bij <strong>Borgund Stavkerk</strong> — de meest authentieke en gave stavkerk van Noorwegen (±45 min omweg waard). Inchecken in het huisje bij Vik aan de Sognefjord.",
-    moreLink: null,
-    heroImage: "images/Sognefjord.png",
-    heroAlt: "Noors landschap vallei"
-  },
-  {
-    id: 9,
-    date: "Mon Jul 13",
-    weekday: "Monday",
-    dateShort: "13 jul",
-    phase: "vik",
-    phaseLabel: "Vik · Sognefjord",
-    place: "Vik",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Huisje",
-      name: "Huisje Vik (Sognefjord)",
-      url: "https://www.airbnb.com/l/eJeobn4n",
-      address: "Vangsnesvegen 576, Vik, Vestland 6894, Norway",
-      mapsUrl: "https://maps.google.com/?q=Vangsnesvegen+576,+Vik,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "<strong>Hopperstad Stavkerk</strong> bezoeken — gebouwd rond 1130, nog op de originele plek en een van de oudste stavkerken van Noorwegen. Combipakket met de nabijgelegen <strong>Hove Steenkerk</strong> (1170 AD, 2 km verderop). Aansluitend: <strong>Gamalosten kaasproeverij</strong> bij de TINE Dairy in het centrum van Vik.",
-    moreLink: "https://www.stavechurch.com",
-    heroImage: "images/Sognefjord.png",
-    heroAlt: "Noors dorp Sognefjord"
-  },
-  {
-    id: 10,
-    date: "Tue Jul 14",
-    weekday: "Tuesday",
-    dateShort: "14 jul",
-    phase: "vik",
-    phaseLabel: "Vik · Sognefjord",
-    place: "Vik",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Huisje",
-      name: "Huisje Vik (Sognefjord)",
-      url: "https://www.airbnb.com/l/eJeobn4n",
-      address: "Vangsnesvegen 576, Vik, Vestland 6894, Norway",
-      mapsUrl: "https://maps.google.com/?q=Vangsnesvegen+576,+Vik,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "<strong>RIB-tocht op de Sognefjord</strong> met Vik Adventure (vertrek 13:00). Vaar naar de verborgen <strong>Arnafjord</strong>, het stille <strong>Finnafjord</strong> en het eiland <strong>Kvamsøy</strong> — het kleinste eiland ter wereld met een eigen kerk. ~3 uur, gids inclusief.",
-    moreLink: "https://vikadventure.no",
-    heroImage: "images/Sognefjord.png",
-    heroAlt: "Sognefjord RIB tour"
-  },
-  {
-    id: 11,
-    date: "Wed Jul 15",
-    weekday: "Wednesday",
-    dateShort: "15 jul",
-    phase: "vik",
-    phaseLabel: "Vik · Sognefjord",
-    place: "Vik",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Huisje",
-      name: "Huisje Vik (Sognefjord)",
-      url: "https://www.airbnb.com/l/eJeobn4n",
-      address: "Vangsnesvegen 576, Vik, Vestland 6894, Norway",
-      mapsUrl: "https://maps.google.com/?q=Vangsnesvegen+576,+Vik,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "Ochtend: <strong>Ovriseggi wandeling</strong> op het Vikafjellet plateau — een ontspannen ridge walk met spectaculair uitzicht over de Sognefjord, Vik en de overkant richting Balestrand. Middag: dagtocht naar <strong>Balestrand</strong> (pont of rijden) voor de Vikingstandbeelden bij Vangsnes, St. Olaf kerk en de fruitparkwinkel.",
-    moreLink: null,
-    heroImage: "images/Sognefjord.png",
-    heroAlt: "Sognefjord panorama"
-  },
-  {
-    id: 12,
-    date: "Thu Jul 16",
-    weekday: "Thursday",
-    dateShort: "16 jul",
-    phase: "reis",
-    phaseLabel: "Reisdag",
-    place: "Vik → Flåm",
-    isTravel: true,
-    travelIcon: "🚗",
-    travelTime: "~2 uur via Aurland",
-    travelLink: null,
-    accom: {
-      type: "Airbnb · Huisje",
-      name: "Huisje Flåm (Aurlandsfjord)",
-      url: "https://www.airbnb.co.uk/rooms/50521762",
-      address: "Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway",
-      mapsUrl: "https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "Rijdag ~2 uur via Aurland naar Flåm. Inchecken in het huisje aan het Aurlandsfjord. Avond: <strong>Ægir Brouwerijpub</strong> in Flåm — Vikinggeïnspireerd menu met huisbieren in een geweldig sfeervolle brouwerij.",
-    moreLink: "https://aegirbrygghus.no",
-    heroImage: "images/Flam.png",
-    heroAlt: "Aurlandsfjord Flåm"
-  },
-  {
-    id: 13,
-    date: "Fri Jul 17",
-    weekday: "Friday",
-    dateShort: "17 jul",
-    phase: "flam",
-    phaseLabel: "Flåm · Aurlandsfjord",
-    place: "Flåm",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Huisje",
-      name: "Huisje Flåm (Aurlandsfjord)",
-      url: "https://www.airbnb.co.uk/rooms/50521762",
-      address: "Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway",
-      mapsUrl: "https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "De <strong>Flåmsbana</strong> — één van de mooiste en steilste spoorwegen ter wereld. 20 km, 20 tunnels (18 met de hand uitgehouwen), hoogteverschil van 864m. De trein maakt een fotostop bij de majesteuze <strong>Kjosfossen waterval</strong>. Boek vroeg voor de beste tijden.",
-    moreLink: "https://www.norwaysbest.com/en/flam/things-to-do",
-    heroImage: "images/Flam.png",
-    heroAlt: "Flåm Railway treinreis"
-  },
-  {
-    id: 14,
-    date: "Sat Jul 18",
-    weekday: "Saturday",
-    dateShort: "18 jul",
-    phase: "flam",
-    phaseLabel: "Flåm · Aurlandsfjord",
-    place: "Flåm",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Huisje",
-      name: "Huisje Flåm (Aurlandsfjord)",
-      url: "https://www.airbnb.co.uk/rooms/50521762",
-      address: "Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway",
-      mapsUrl: "https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "<strong>Nærøyfjord cruise</strong> met het stille, elektrische schip <em>Future of the Fjords</em>. Twee uur varen door de UNESCO-beschermde smalle fjord van Flåm naar Gudvangen. Optie: in Gudvangen uitstappen voor een bezoek aan het Vikingdorp <strong>Njardarheimr</strong> en het spectaculaire uitzicht vanaf het Stalheim Hotel.",
-    moreLink: "https://www.norwaysbest.com/en/flam/things-to-do",
-    heroImage: "images/Flam.png",
-    heroAlt: "Nærøyfjord cruise"
-  },
-  {
-    id: 15,
-    date: "Sun Jul 19",
-    weekday: "Sunday",
-    dateShort: "19 jul",
-    phase: "flam",
-    phaseLabel: "Flåm · Aurlandsfjord",
-    place: "Flåm",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Huisje",
-      name: "Huisje Flåm (Aurlandsfjord)",
-      url: "https://www.airbnb.co.uk/rooms/50521762",
-      address: "Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway",
-      mapsUrl: "https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "Actieve dag: <strong>Trein + Wandel + Fiets combo</strong>. Neem de Flåmsbana omhoog naar Vatnahalsen of Myrdal. Wandel 3,5 km naar beneden langs 21 haarspeldbochten. Fiets dan 17 km terug naar Flåm via de historische <strong>Rallarvegen</strong>. Een onvergetelijke combinatie van trein, natuur en beweging.",
-    moreLink: "https://www.norwaysbest.com/en/flam/things-to-do",
-    heroImage: "images/Flam.png",
-    heroAlt: "Noors berglandschap fiets"
-  },
-  {
-    id: 16,
-    date: "Mon Jul 20",
-    weekday: "Monday",
-    dateShort: "20 jul",
-    phase: "flam",
-    phaseLabel: "Flåm · Aurlandsfjord",
-    place: "Flåm",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Huisje",
-      name: "Huisje Flåm (Aurlandsfjord)",
-      url: "https://www.airbnb.co.uk/rooms/50521762",
-      address: "Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway",
-      mapsUrl: "https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway",
-      icon: "🏠",
-      booked: true
-    },
-    activities: "Vroeg naar het <strong>Stegastein uitkijkpunt</strong> — 650m boven Aurland, 30m uitstekend platform boven het fjord. Daarna de <strong>Mt. Prest wandeling</strong> met shuttle vanaf Flåm voor een panoramisch uitzicht over de Aurlandsfjord. Avond: <strong>The Fjord Farm</strong> voor lokale proeverijen en een intiem concert met Noors volksmuziek.",
-    moreLink: "https://www.norwaysbest.com/en/flam/things-to-do",
-    heroImage: "images/Flam.png",
-    heroAlt: "Stegastein uitkijkpunt Noorwegen"
-  },
-  {
-    id: 17,
-    date: "Tue Jul 21",
-    weekday: "Tuesday",
-    dateShort: "21 jul",
-    phase: "reis",
-    phaseLabel: "Reisdag",
-    place: "Flåm → Oslo",
-    isTravel: true,
-    travelIcon: "🚗",
-    travelTime: "~5 uur via rv7 (Hardangervidda)",
-    travelLink: null,
-    accom: {
-      type: "Airbnb · Appartement",
-      name: "Appartement Grünerløkka Oslo",
-      url: "https://www.airbnb.co.uk/rooms/1037659952342914089",
-      address: "Seilduksgata 2A, Grünerløkka, Oslo 0553",
-      mapsUrl: "https://maps.google.com/?q=Seilduksgata+2A,+Oslo",
-      icon: "🏙️",
-      booked: true
-    },
-    activities: "Rijdag ~5 uur. Neem de <strong>rv7 via Hardangervidda</strong> — een van Noorwegens mooiste rijroutes over het hoogplateau. Inchecken in het appartement in <strong>Grünerløkka</strong>, het bruisende creatieve hart van Oslo.",
-    moreLink: null,
-    heroImage: "images/olso_huisje.jpg",
-    heroAlt: "Oslo Grünerløkka"
-  },
-  {
-    id: 18,
-    date: "Wed Jul 22",
-    weekday: "Wednesday",
-    dateShort: "22 jul",
-    phase: "oslo",
-    phaseLabel: "Oslo",
-    place: "Oslo",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Appartement",
-      name: "Appartement Grünerløkka Oslo",
-      url: "https://www.airbnb.co.uk/rooms/1037659952342914089",
-      address: "Seilduksgata 2A, Grünerløkka, Oslo 0553",
-      mapsUrl: "https://maps.google.com/?q=Seilduksgata+2A,+Oslo",
-      icon: "🏙️",
-      booked: true
-    },
-    activities: "Ochtend: <strong>Bygdøy</strong> — de Vikingschepen (pre-boeken!) en het Fram Museum. Middag: het enorme <strong>Vigeland Sculpturenpark</strong> met 212 bronzen en granieten sculpturen (gratis toegang). Avond: terug in de eigen wijk voor <strong>Mathallen</strong> foodmarkt en een wandeling langs <strong>Thorvald Meyers gate</strong>.",
-    moreLink: "https://www.norwaysbest.com/en/inspiration/24-hours-in-oslo-discover-norway-s-capital-in-a-day",
-    heroImage: "images/oslo_huisje.jpg",
-    heroAlt: "Oslo Noorwegen"
-  },
-  {
-    id: 19,
-    date: "Thu Jul 23",
-    weekday: "Thursday",
-    dateShort: "23 jul",
-    phase: "oslo",
-    phaseLabel: "Oslo",
-    place: "Oslo",
-    isTravel: false,
-    accom: {
-      type: "Airbnb · Appartement",
-      name: "Appartement Grünerløkka Oslo",
-      url: "https://www.airbnb.co.uk/rooms/1037659952342914089",
-      address: "Seilduksgata 2A, Grünerløkka, Oslo 0553",
-      mapsUrl: "https://maps.google.com/?q=Seilduksgata+2A,+Oslo",
-      icon: "🏙️",
-      booked: true
-    },
-    activities: "Vrije dag in Oslo naar eigen inzicht. Opties: <strong>Munch Museum</strong> (The Scream), het dak van de <strong>Oslo Opera House</strong> (gratis uitzicht over de Oslofjord), <strong>Sørenga Seawater Pool</strong> — een buitenzwembad direct aan het fjord. Of gewoon relaxen in de eigen wijk Grünerløkka.",
-    moreLink: "https://www.norwaysbest.com/en/inspiration/24-hours-in-oslo-discover-norway-s-capital-in-a-day",
-    heroImage: "images/oslo_huisje.jpg",
-    heroAlt: "Oslo Opera House"
-  },
-  {
-    id: 20,
-    date: "Fri Jul 24",
-    weekday: "Friday",
-    dateShort: "24 jul",
-    phase: "reis",
-    phaseLabel: "Reisdag · Boot",
-    place: "Oslo → Kiel",
-    isTravel: true,
-    travelIcon: "⛴️",
-    travelTime: "Boot 14:00 → aankomst Kiel 10:00",
-    travelLink: "https://www.colorline.nl/duitsland-noorwegen",
-    accom: {
-      type: "Color Line Ferry",
-      name: "Color Line · Oslo → Kiel",
-      url: "https://www.colorline.nl/duitsland-noorwegen",
-      address: "Oslo Cruise Terminal, Akershusstranda, Oslo",
-      mapsUrl: "https://maps.google.com/?q=Oslo+Cruise+Terminal",
-      icon: "⛴️",
-      booked: true
-    },
-    activities: "Ochtend vrij in Oslo. Optie: <strong>Munch Museum</strong> of een wandeling over het dak van de Oslo Opera. Zorg dat je om <strong>12:00 ingecheckt</strong> bent bij de terminal met de auto. <strong>Color Line boot vertrekt om 14:00</strong>. Aankomst Kiel de volgende ochtend om ~10:00.",
-    moreLink: null,
-    heroImage: "images/osloferry.jpg",
-    heroAlt: "Ferry vertrek Noorwegen"
-  },
-  {
-    id: 21,
-    date: "Sat Jul 25",
-    weekday: "Saturday",
-    dateShort: "25 jul",
-    phase: "reis",
-    phaseLabel: "Thuisreis",
-    place: "Kiel → Amsterdam",
-    isTravel: true,
-    travelIcon: "🏠",
-    travelTime: "~6 uur rijden",
-    travelLink: null,
-    accom: null,
-    activities: "Aankomst Kiel ~10:00. Rijden naar Amsterdam (~6 uur). <strong>Thuis! 🇳🇱</strong>",
-    moreLink: null,
-    heroImage: "images/auto_02.jpg",
-    heroAlt: "Thuiskomst"
-  },
-  {
-    id: 22,
-    date: "Sun Jul 26",
-    weekday: "Sunday",
-    dateShort: "26 jul",
-    phase: "reis",
-    phaseLabel: "Thuis",
-    place: "Amsterdam",
-    isTravel: false,
-    accom: null,
-    activities: "Rustdag. Was en uitpakken. Foto's bekijken. Herinneringen ophalen. <strong>Tot de volgende keer, Noorwegen.</strong> 🇳🇴",
-    moreLink: null,
-    heroImage: "images/thuis_02.jpg",
-    heroAlt: "Rustdag thuis"
-  }
+  { id:0,  date:"Sat Jul 4",  weekday:"Saturday",  dateShort:"4 jul",  phase:"reis",   phaseLabel:"Reisdag",            place:"Amsterdam → Hamburg",    isTravel:true,  travelIcon:"🚗",  travelTime:"~5 uur",                          travelLink:null, accom:{ type:"Hotel",             name:"Hotel Hamburg",                    url:"https://booking.com",                                                           address:"Hamburg, Duitsland",                            mapsUrl:"https://maps.google.com/?q=Hamburg+Germany",                  icon:"🏨", booked:false }, activities:"Vertrek Amsterdam vroeg. Rijden naar Hamburg (~5 uur). Middag en avond Hamburg verkennen: de <strong>Speicherstadt</strong> (UNESCO historisch havendistrict), de <strong>Reeperbahn</strong> en een wandeling langs de <strong>Alster</strong>.",                                                                                                                                                                                                                                                                                                                                  moreLink:null,                                                                    heroImage:"images/auto_01.jpg",       heroAlt:"Hamburg" },
+  { id:1,  date:"Sun Jul 5",  weekday:"Sunday",    dateShort:"5 jul",  phase:"reis",   phaseLabel:"Reisdag",            place:"Hamburg → Bergen",       isTravel:true,  travelIcon:"⛴️", travelTime:"~4.5u rijden + boot ~19u",        travelLink:"https://fjordline.com/en/p/our-ferry-routes/hirtshals-stavanger-bergen", accom:{ type:"Fjord Line Ferry",    name:"Fjord Line · Hirtshals → Bergen",  url:"https://fjordline.com/en/p/our-ferry-routes/hirtshals-stavanger-bergen",        address:"Hirtshals, Denemarken → Bergen, Noorwegen",     mapsUrl:"https://maps.google.com/?q=Hirtshals+Ferry+Terminal",         icon:"⛴️", booked:true  }, activities:"Vroeg vertrek Hamburg. Rijden naar <strong>Hirtshals</strong> (~4,5 uur). Inchecken Fjord Line — houd rekening met 2 uur voor vertrek voor check-in met auto. De ferry vertrekt rond <strong>19:15</strong> en arriveert de volgende ochtend om ~13:00 in Bergen.",                                                                                                                                                                                                                                                                                          moreLink:null,                                                                    heroImage:"images/bergenferry.jpg",   heroAlt:"Ferry" },
+  { id:2,  date:"Mon Jul 6",  weekday:"Monday",    dateShort:"6 jul",  phase:"bergen", phaseLabel:"Bergen",             place:"Bergen",                 isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Hotel",             name:"Hotel Bergen",                     url:"https://www.booking.com/Share-VAw8bjm",                                         address:"Strandgaten 190, Bergen City Centre, Bergen 5817", mapsUrl:"https://maps.google.com/?q=Strandgaten+190,+Bergen,+Norway",  icon:"🏨", booked:false }, activities:"Aankomst Bergen ~13:00. Inchecken hotel. 's Middags een eerste verkenning van <strong>Bryggen</strong> — de kleurrijke UNESCO-hanzehuizen aan de haven. Ga na 17:00 voor minder drukte. Avondeten in de haven.",                                                                                                                                                                                                                                                                                                                                                                 moreLink:null,                                                                    heroImage:"images/Bergen.jpg",        heroAlt:"Bergen Bryggen" },
+  { id:3,  date:"Tue Jul 7",  weekday:"Tuesday",   dateShort:"7 jul",  phase:"bergen", phaseLabel:"Bergen",             place:"Bergen",                 isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Hotel",             name:"Hotel Bergen",                     url:"https://www.booking.com/Share-VAw8bjm",                                         address:"Strandgaten 190, Bergen City Centre, Bergen 5817", mapsUrl:"https://maps.google.com/?q=Strandgaten+190,+Bergen,+Norway",  icon:"🏨", booked:false }, activities:"Ochtend: <strong>Ulrikenbanen kabelbaan</strong> naar Bergen's hoogste berg (643m) — restaurant aan de top. Middag: <strong>Old Bergen Museum</strong> met meer dan 50 historische houten huizen en acteurs in 19e-eeuwse kostuums. Avond: <strong>Troldhaugen</strong>, het prachtige huis van componist Edvard Grieg met uitzicht over het Nordåsmeer.",                                                                                                                                                                                                                                                                             moreLink:null,                                                                    heroImage:"images/Bergen.jpg",        heroAlt:"Bergen bergen" },
+  { id:4,  date:"Wed Jul 8",  weekday:"Wednesday", dateShort:"8 jul",  phase:"reis",   phaseLabel:"Reisdag",            place:"Bergen → Baldersheim",   isTravel:true,  travelIcon:"🚗",  travelTime:"~1.5 uur",                        travelLink:null, accom:{ type:"Airbnb · Oud bakkerij", name:"Huisje Baldersheim (oude bakkerij)", url:"https://www.airbnb.co.uk/rooms/1064997542896120673",                           address:"Årvikvegen 35, 5647 Baldersheim, Norway",        mapsUrl:"https://maps.google.com/?q=Årvikvegen+35,+5647+Baldersheim,+Norway",  icon:"🏠", booked:true  }, activities:"Rijdag ~1,5 uur van Bergen. Optionele tussenstop bij de middeleeuwse <strong>Lysekloster kloosterruïne</strong>. Inchecken in het huisje in de oude bakkerij aan het Bjørnafjord.",                                                                                                                                                                                                                                                                                                                                                                                     moreLink:null,                                                                    heroImage:"images/Bjornafjorden.png", heroAlt:"Bjørnafjorden" },
+  { id:5,  date:"Thu Jul 9",  weekday:"Thursday",  dateShort:"9 jul",  phase:"bald",   phaseLabel:"Baldersheim",        place:"Bjørnafjorden",          isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Oud bakkerij", name:"Huisje Baldersheim (oude bakkerij)", url:"https://www.airbnb.co.uk/rooms/1064997542896120673",                           address:"Årvikvegen 35, 5647 Baldersheim, Norway",        mapsUrl:"https://maps.google.com/?q=Årvikvegen+35,+5647+Baldersheim,+Norway",  icon:"🏠", booked:true  }, activities:"Rustdag aan het brede, stille Bjørnafjord. Wandelen langs het water, zwemmen, de haven van <strong>Osøyro</strong> verkennen. 's Avonds barbecueën op het terras met uitzicht over het fjord.",                                                                                                                                                                                                                                                                                                                                                                                           moreLink:null,                                                                    heroImage:"images/Bjornafjorden.png", heroAlt:"Bjørnafjorden" },
+  { id:6,  date:"Fri Jul 10", weekday:"Friday",    dateShort:"10 jul", phase:"bald",   phaseLabel:"Baldersheim",        place:"Bjørnafjorden",          isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Oud bakkerij", name:"Huisje Baldersheim (oude bakkerij)", url:"https://www.airbnb.co.uk/rooms/1064997542896120673",                           address:"Årvikvegen 35, 5647 Baldersheim, Norway",        mapsUrl:"https://maps.google.com/?q=Årvikvegen+35,+5647+Baldersheim,+Norway",  icon:"🏠", booked:true  }, activities:"Dagtocht naar het eiland <strong>Lysøen</strong> — het buitenverblijf van de beroemde Noorse violist Ole Bull. Een bootje brengt je naar het eiland met zijn Moorse villa en rustig natuurreservaat. Weinig bezocht, indrukwekkend mooi.",                                                                                                                                                                                                                                                                                                                                                          moreLink:"https://lysoen.no",                                                     heroImage:"images/Bjornafjorden.png", heroAlt:"Lysøen eiland" },
+  { id:7,  date:"Sat Jul 11", weekday:"Saturday",  dateShort:"11 jul", phase:"bald",   phaseLabel:"Baldersheim",        place:"Hardangerfjord (dagtocht)", isTravel:false, travelIcon:null, travelTime:null,                           travelLink:null, accom:{ type:"Airbnb · Oud bakkerij", name:"Huisje Baldersheim (oude bakkerij)", url:"https://www.airbnb.co.uk/rooms/1064997542896120673",                           address:"Årvikvegen 35, 5647 Baldersheim, Norway",        mapsUrl:"https://maps.google.com/?q=Årvikvegen+35,+5647+Baldersheim,+Norway",  icon:"🏠", booked:true  }, activities:"Dagtocht naar het <strong>Hardangerfjord</strong> (~1u rijden via Norheimsund). Tussenstop <strong>Stegastein uitkijkpunt</strong> (650m boven het fjord). Verder naar <strong>Eidfjord</strong> en de iconische <strong>Vøringsfossen</strong> waterval. Optioneel: fjordcruise boot vanaf Norheimsund (vertrek 09:00, terug 18:15).",                                                                                                                                                                                                                                                                         moreLink:"https://www.norled.no/en/fjordcruise/hardangerfjord-from-norheimsund/", heroImage:"images/Bjornafjorden.png", heroAlt:"Hardangerfjord" },
+  { id:8,  date:"Sun Jul 12", weekday:"Sunday",    dateShort:"12 jul", phase:"reis",   phaseLabel:"Reisdag",            place:"Baldersheim → Vik",      isTravel:true,  travelIcon:"🚗",  travelTime:"~3.5 uur via Lærdal",             travelLink:null, accom:{ type:"Airbnb · Huisje",      name:"Huisje Vik (Sognefjord)",          url:"https://www.airbnb.com/l/eJeobn4n",                                             address:"Vangsnesvegen 576, Vik, Vestland 6894, Norway",  mapsUrl:"https://maps.google.com/?q=Vangsnesvegen+576,+Vik,+Norway",   icon:"🏠", booked:true  }, activities:"Rijdag ~3,5 uur via het Lærdal-dal. Tussenstop bij <strong>Borgund Stavkerk</strong> — de meest authentieke en gave stavkerk van Noorwegen (±45 min omweg waard). Inchecken in het huisje bij Vik aan de Sognefjord.",                                                                                                                                                                                                                                                                                                                                                               moreLink:null,                                                                    heroImage:"images/Sognefjord.png",    heroAlt:"Sognefjord" },
+  { id:9,  date:"Mon Jul 13", weekday:"Monday",    dateShort:"13 jul", phase:"vik",    phaseLabel:"Vik · Sognefjord",   place:"Vik",                    isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Huisje",      name:"Huisje Vik (Sognefjord)",          url:"https://www.airbnb.com/l/eJeobn4n",                                             address:"Vangsnesvegen 576, Vik, Vestland 6894, Norway",  mapsUrl:"https://maps.google.com/?q=Vangsnesvegen+576,+Vik,+Norway",   icon:"🏠", booked:true  }, activities:"<strong>Hopperstad Stavkerk</strong> bezoeken — gebouwd rond 1130, nog op de originele plek en een van de oudste stavkerken van Noorwegen. Combipakket met de nabijgelegen <strong>Hove Steenkerk</strong> (1170 AD, 2 km verderop). Aansluitend: <strong>Gamalosten kaasproeverij</strong> bij de TINE Dairy in het centrum van Vik.",                                                                                                                                                                                                                                                                               moreLink:"https://www.stavechurch.com",                                           heroImage:"images/Sognefjord.png",    heroAlt:"Vik Sognefjord" },
+  { id:10, date:"Tue Jul 14", weekday:"Tuesday",   dateShort:"14 jul", phase:"vik",    phaseLabel:"Vik · Sognefjord",   place:"Vik",                    isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Huisje",      name:"Huisje Vik (Sognefjord)",          url:"https://www.airbnb.com/l/eJeobn4n",                                             address:"Vangsnesvegen 576, Vik, Vestland 6894, Norway",  mapsUrl:"https://maps.google.com/?q=Vangsnesvegen+576,+Vik,+Norway",   icon:"🏠", booked:true  }, activities:"<strong>RIB-tocht op de Sognefjord</strong> met Vik Adventure (vertrek 13:00). Vaar naar de verborgen <strong>Arnafjord</strong>, het stille <strong>Finnafjord</strong> en het eiland <strong>Kvamsøy</strong> — het kleinste eiland ter wereld met een eigen kerk. ~3 uur, gids inclusief.",                                                                                                                                                                                                                                                                                                              moreLink:"https://vikadventure.no",                                               heroImage:"images/Sognefjord.png",    heroAlt:"Sognefjord RIB" },
+  { id:11, date:"Wed Jul 15", weekday:"Wednesday", dateShort:"15 jul", phase:"vik",    phaseLabel:"Vik · Sognefjord",   place:"Vik",                    isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Huisje",      name:"Huisje Vik (Sognefjord)",          url:"https://www.airbnb.com/l/eJeobn4n",                                             address:"Vangsnesvegen 576, Vik, Vestland 6894, Norway",  mapsUrl:"https://maps.google.com/?q=Vangsnesvegen+576,+Vik,+Norway",   icon:"🏠", booked:true  }, activities:"Ochtend: <strong>Ovriseggi wandeling</strong> op het Vikafjellet plateau — een ontspannen ridge walk met spectaculair uitzicht over de Sognefjord, Vik en de overkant richting Balestrand. Middag: dagtocht naar <strong>Balestrand</strong> (pont of rijden) voor de Vikingstandbeelden bij Vangsnes, St. Olaf kerk en de fruitparkwinkel.",                                                                                                                                                                                                                                                                    moreLink:null,                                                                    heroImage:"images/Sognefjord.png",    heroAlt:"Sognefjord panorama" },
+  { id:12, date:"Thu Jul 16", weekday:"Thursday",  dateShort:"16 jul", phase:"reis",   phaseLabel:"Reisdag",            place:"Vik → Flåm",             isTravel:true,  travelIcon:"🚗",  travelTime:"~2 uur via Aurland",              travelLink:null, accom:{ type:"Airbnb · Huisje",      name:"Huisje Flåm (Aurlandsfjord)",      url:"https://www.airbnb.co.uk/rooms/50521762",                                        address:"Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway", mapsUrl:"https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway", icon:"🏠", booked:true }, activities:"Rijdag ~2 uur via Aurland naar Flåm. Inchecken in het huisje aan het Aurlandsfjord. Avond: <strong>Ægir Brouwerijpub</strong> in Flåm — Vikinggeïnspireerd menu met huisbieren in een geweldig sfeervolle brouwerij.",                                                                                                                                                                                                                                                                                                                                                                           moreLink:"https://aegirbrygghus.no",                                              heroImage:"images/Flam.png",          heroAlt:"Flåm Aurlandsfjord" },
+  { id:13, date:"Fri Jul 17", weekday:"Friday",    dateShort:"17 jul", phase:"flam",   phaseLabel:"Flåm · Aurlandsfjord", place:"Flåm",                 isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Huisje",      name:"Huisje Flåm (Aurlandsfjord)",      url:"https://www.airbnb.co.uk/rooms/50521762",                                        address:"Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway", mapsUrl:"https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway", icon:"🏠", booked:true }, activities:"De <strong>Flåmsbana</strong> — één van de mooiste en steilste spoorwegen ter wereld. 20 km, 20 tunnels (18 met de hand uitgehouwen), hoogteverschil van 864m. De trein maakt een fotostop bij de majesteuze <strong>Kjosfossen waterval</strong>. Boek vroeg voor de beste tijden.",                                                                                                                                                                                                                                                                                                                        moreLink:"https://www.norwaysbest.com/en/flam/things-to-do",                      heroImage:"images/Flam.png",          heroAlt:"Flåmsbana" },
+  { id:14, date:"Sat Jul 18", weekday:"Saturday",  dateShort:"18 jul", phase:"flam",   phaseLabel:"Flåm · Aurlandsfjord", place:"Flåm",                 isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Huisje",      name:"Huisje Flåm (Aurlandsfjord)",      url:"https://www.airbnb.co.uk/rooms/50521762",                                        address:"Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway", mapsUrl:"https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway", icon:"🏠", booked:true }, activities:"<strong>Nærøyfjord cruise</strong> met het stille, elektrische schip <em>Future of the Fjords</em>. Twee uur varen door de UNESCO-beschermde smalle fjord van Flåm naar Gudvangen. Optie: in Gudvangen uitstappen voor een bezoek aan het Vikingdorp <strong>Njardarheimr</strong> en het spectaculaire uitzicht vanaf het Stalheim Hotel.",                                                                                                                                                                                                                                                                              moreLink:"https://www.norwaysbest.com/en/flam/things-to-do",                      heroImage:"images/Flam.png",          heroAlt:"Nærøyfjord" },
+  { id:15, date:"Sun Jul 19", weekday:"Sunday",    dateShort:"19 jul", phase:"flam",   phaseLabel:"Flåm · Aurlandsfjord", place:"Flåm",                 isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Huisje",      name:"Huisje Flåm (Aurlandsfjord)",      url:"https://www.airbnb.co.uk/rooms/50521762",                                        address:"Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway", mapsUrl:"https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway", icon:"🏠", booked:true }, activities:"Actieve dag: <strong>Trein + Wandel + Fiets combo</strong>. Neem de Flåmsbana omhoog naar Vatnahalsen of Myrdal. Wandel 3,5 km naar beneden langs 21 haarspeldbochten. Fiets dan 17 km terug naar Flåm via de historische <strong>Rallarvegen</strong>. Een onvergetelijke combinatie van trein, natuur en beweging.",                                                                                                                                                                                                                                                                                                    moreLink:"https://www.norwaysbest.com/en/flam/things-to-do",                      heroImage:"images/Flam.png",          heroAlt:"Rallarvegen" },
+  { id:16, date:"Mon Jul 20", weekday:"Monday",    dateShort:"20 jul", phase:"flam",   phaseLabel:"Flåm · Aurlandsfjord", place:"Flåm",                 isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Huisje",      name:"Huisje Flåm (Aurlandsfjord)",      url:"https://www.airbnb.co.uk/rooms/50521762",                                        address:"Flåmsdalsvegen 156, Aurland, Vestland 5743, Norway", mapsUrl:"https://maps.google.com/?q=Flåmsdalsvegen+156,+Aurland,+Norway", icon:"🏠", booked:true }, activities:"Vroeg naar het <strong>Stegastein uitkijkpunt</strong> — 650m boven Aurland, 30m uitstekend platform boven het fjord. Daarna de <strong>Mt. Prest wandeling</strong> met shuttle vanaf Flåm voor een panoramisch uitzicht over de Aurlandsfjord. Avond: <strong>The Fjord Farm</strong> voor lokale proeverijen en een intiem concert met Noors volksmuziek.",                                                                                                                                                                                                                                                                moreLink:"https://www.norwaysbest.com/en/flam/things-to-do",                      heroImage:"images/Flam.png",          heroAlt:"Stegastein" },
+  { id:17, date:"Tue Jul 21", weekday:"Tuesday",   dateShort:"21 jul", phase:"reis",   phaseLabel:"Reisdag",            place:"Flåm → Oslo",            isTravel:true,  travelIcon:"🚗",  travelTime:"~5 uur via rv7 (Hardangervidda)", travelLink:null, accom:{ type:"Airbnb · Appartement", name:"Appartement Grünerløkka Oslo",     url:"https://www.airbnb.co.uk/rooms/1037659952342914089",                             address:"Seilduksgata 2A, Grünerløkka, Oslo 0553",        mapsUrl:"https://maps.google.com/?q=Seilduksgata+2A,+Oslo",            icon:"🏙️", booked:true }, activities:"Rijdag ~5 uur. Neem de <strong>rv7 via Hardangervidda</strong> — een van Noorwegens mooiste rijroutes over het hoogplateau. Inchecken in het appartement in <strong>Grünerløkka</strong>, het bruisende creatieve hart van Oslo.",                                                                                                                                                                                                                                                                                                                                                              moreLink:null,                                                                    heroImage:"images/olso_huisje.jpg",   heroAlt:"Oslo Grünerløkka" },
+  { id:18, date:"Wed Jul 22", weekday:"Wednesday", dateShort:"22 jul", phase:"oslo",   phaseLabel:"Oslo",               place:"Oslo",                   isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Appartement", name:"Appartement Grünerløkka Oslo",     url:"https://www.airbnb.co.uk/rooms/1037659952342914089",                             address:"Seilduksgata 2A, Grünerløkka, Oslo 0553",        mapsUrl:"https://maps.google.com/?q=Seilduksgata+2A,+Oslo",            icon:"🏙️", booked:true }, activities:"Ochtend: <strong>Bygdøy</strong> — de Vikingschepen (pre-boeken!) en het Fram Museum. Middag: het enorme <strong>Vigeland Sculpturenpark</strong> met 212 bronzen en granieten sculpturen (gratis toegang). Avond: terug in de eigen wijk voor <strong>Mathallen</strong> foodmarkt en een wandeling langs <strong>Thorvald Meyers gate</strong>.",                                                                                                                                                                                                                                                               moreLink:"https://www.norwaysbest.com/en/inspiration/24-hours-in-oslo-discover-norway-s-capital-in-a-day", heroImage:"images/oslo_huisje.jpg", heroAlt:"Oslo" },
+  { id:19, date:"Thu Jul 23", weekday:"Thursday",  dateShort:"23 jul", phase:"oslo",   phaseLabel:"Oslo",               place:"Oslo",                   isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:{ type:"Airbnb · Appartement", name:"Appartement Grünerløkka Oslo",     url:"https://www.airbnb.co.uk/rooms/1037659952342914089",                             address:"Seilduksgata 2A, Grünerløkka, Oslo 0553",        mapsUrl:"https://maps.google.com/?q=Seilduksgata+2A,+Oslo",            icon:"🏙️", booked:true }, activities:"Vrije dag in Oslo naar eigen inzicht. Opties: <strong>Munch Museum</strong> (The Scream), het dak van de <strong>Oslo Opera House</strong> (gratis uitzicht over de Oslofjord), <strong>Sørenga Seawater Pool</strong> — een buitenzwembad direct aan het fjord. Of gewoon relaxen in de eigen wijk Grünerløkka.",                                                                                                                                                                                                                                                                                              moreLink:"https://www.norwaysbest.com/en/inspiration/24-hours-in-oslo-discover-norway-s-capital-in-a-day", heroImage:"images/oslo_huisje.jpg", heroAlt:"Oslo Opera" },
+  { id:20, date:"Fri Jul 24", weekday:"Friday",    dateShort:"24 jul", phase:"reis",   phaseLabel:"Reisdag · Boot",     place:"Oslo → Kiel",            isTravel:true,  travelIcon:"⛴️", travelTime:"Boot 14:00 → aankomst Kiel 10:00", travelLink:"https://www.colorline.nl/duitsland-noorwegen", accom:{ type:"Color Line Ferry",    name:"Color Line · Oslo → Kiel",         url:"https://www.colorline.nl/duitsland-noorwegen",                                  address:"Oslo Cruise Terminal, Akershusstranda, Oslo",    mapsUrl:"https://maps.google.com/?q=Oslo+Cruise+Terminal",             icon:"⛴️", booked:true  }, activities:"Ochtend vrij in Oslo. Optie: <strong>Munch Museum</strong> of een wandeling over het dak van de Oslo Opera. Zorg dat je om <strong>12:00 ingecheckt</strong> bent bij de terminal met de auto. <strong>Color Line boot vertrekt om 14:00</strong>. Aankomst Kiel de volgende ochtend om ~10:00.",                                                                                                                                                                                                                                                                                             moreLink:null,                                                                    heroImage:"images/osloferry.jpg",     heroAlt:"Ferry Oslo Kiel" },
+  { id:21, date:"Sat Jul 25", weekday:"Saturday",  dateShort:"25 jul", phase:"reis",   phaseLabel:"Thuisreis",          place:"Kiel → Amsterdam",       isTravel:true,  travelIcon:"🏠",  travelTime:"~6 uur rijden",                   travelLink:null, accom:null,                                                                                                                                                                                                                                                                                                                                                                                                                                           activities:"Aankomst Kiel ~10:00. Rijden naar Amsterdam (~6 uur). <strong>Thuis! 🇳🇱</strong>",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   moreLink:null,                                                                    heroImage:"images/auto_02.jpg",       heroAlt:"Thuisreis" },
+  { id:22, date:"Sun Jul 26", weekday:"Sunday",    dateShort:"26 jul", phase:"reis",   phaseLabel:"Thuis",              place:"Amsterdam",              isTravel:false, travelIcon:null, travelTime:null,                              travelLink:null, accom:null,                                                                                                                                                                                                                                                                                                                                                                                                                                           activities:"Rustdag. Was en uitpakken. Foto's bekijken. Herinneringen ophalen. <strong>Tot de volgende keer, Noorwegen.</strong> 🇳🇴",                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             moreLink:null,                                                                    heroImage:"images/thuis_02.jpg",      heroAlt:"Thuis" },
 ];
 
-// Destinations
 const destinations = [
-  { id: "reis",    label: "Reisdagen",     dates: "4, 5, 8, 12, 16, 21, 25, 26 jul", firstDay: 0,  dotClass: "phase-reis" },
-  { id: "bergen",  label: "Bergen",         dates: "6–7 juli · 2 nachten",             firstDay: 2,  dotClass: "phase-bergen" },
-  { id: "bald",    label: "Baldersheim",    dates: "8–11 juli · 4 nachten",            firstDay: 4,  dotClass: "phase-bald" },
-  { id: "vik",     label: "Vik (Sognefjord)", dates: "12–15 juli · 4 nachten",         firstDay: 8,  dotClass: "phase-vik" },
-  { id: "flam",    label: "Flåm (Aurlandsfjord)", dates: "16–21 juli · 5 nachten",     firstDay: 12, dotClass: "phase-flam" },
-  { id: "oslo",    label: "Oslo",           dates: "21–24 juli · 3 nachten",           firstDay: 17, dotClass: "phase-oslo" },
+  { id:"reis",   label:"Reisdagen",           dates:"4, 5, 8, 12, 16, 21, 25, 26 jul", firstDay:0,  dotClass:"phase-reis" },
+  { id:"bergen", label:"Bergen",              dates:"6–7 juli · 2 nachten",             firstDay:2,  dotClass:"phase-bergen" },
+  { id:"bald",   label:"Baldersheim",         dates:"8–11 juli · 4 nachten",            firstDay:4,  dotClass:"phase-bald" },
+  { id:"vik",    label:"Vik (Sognefjord)",    dates:"12–15 juli · 4 nachten",           firstDay:8,  dotClass:"phase-vik" },
+  { id:"flam",   label:"Flåm (Aurlandsfjord)",dates:"16–21 juli · 5 nachten",           firstDay:12, dotClass:"phase-flam" },
+  { id:"oslo",   label:"Oslo",                dates:"21–24 juli · 3 nachten",           firstDay:17, dotClass:"phase-oslo" },
 ];
 
-// Phase groups for dates view
 const phaseGroups = [
-  { label: "Heenreis",      days: [0, 1] },
-  { label: "Bergen",        days: [2, 3] },
-  { label: "Baldersheim",   days: [4, 5, 6, 7] },
-  { label: "Sognefjord · Vik", days: [8, 9, 10, 11] },
-  { label: "Flåm · Aurland",  days: [12, 13, 14, 15, 16] },
-  { label: "Oslo",          days: [17, 18, 19, 20] },
-  { label: "Terugreis",     days: [21, 22] },
+  { label:"Heenreis",          days:[0,1] },
+  { label:"Bergen",            days:[2,3] },
+  { label:"Baldersheim",       days:[4,5,6,7] },
+  { label:"Sognefjord · Vik",  days:[8,9,10,11] },
+  { label:"Flåm · Aurland",   days:[12,13,14,15,16] },
+  { label:"Oslo",              days:[17,18,19,20] },
+  { label:"Terugreis",         days:[21,22] },
 ];
 
-// ────────────────────────────────────────────────────────────────────────────
-// BUILD UI
-// ────────────────────────────────────────────────────────────────────────────
 let currentDay = 0;
 let sidebarOpen = false;
 let currentView = "dates";
@@ -1262,12 +278,7 @@ function buildSidebar() {
       item.id = "nav-" + di;
       item.href = "#";
       item.onclick = (e) => { e.preventDefault(); goToDay(di); if (window.innerWidth < 768) closeSidebar(); };
-      item.innerHTML = `
-        <span class="nav-day-num">${di + 1}</span>
-        <div>
-          <div class="nav-date">${d.date}</div>
-          <div class="nav-loc">${d.place}</div>
-        </div>`;
+      item.innerHTML = `<span class="nav-day-num">${di + 1}</span><div><div class="nav-date">${d.date}</div><div class="nav-loc">${d.place}</div></div>`;
       datesEl.appendChild(item);
     });
   });
@@ -1281,12 +292,7 @@ function buildSidebar() {
     btn.className = "dest-btn" + (days[currentDay].phase === dest.id ? " active" : "");
     btn.id = "dest-" + dest.id;
     btn.onclick = () => { goToDay(dest.firstDay); if (window.innerWidth < 768) closeSidebar(); };
-    btn.innerHTML = `
-      <span class="dest-dot ${dest.dotClass}"></span>
-      <div>
-        <div class="dest-name">${dest.label}</div>
-        <div class="dest-dates">${dest.dates}</div>
-      </div>`;
+    btn.innerHTML = `<span class="dest-dot ${dest.dotClass}"></span><div><div class="dest-name">${dest.label}</div><div class="dest-dates">${dest.dates}</div></div>`;
     group.appendChild(btn);
     destsEl.appendChild(group);
   });
@@ -1300,66 +306,57 @@ function buildMain() {
     page.className = "day-page" + (i === currentDay ? " active" : "");
     page.id = "day-" + i;
 
-    // Accommodation block
+    // Accommodation
     let accomHTML = "";
     if (d.accom) {
-      const nameLink = d.accom.url ?
-        `<a href="${d.accom.url}" target="_blank" rel="noopener" class="accom-name">${d.accom.name}</a>` :
-        `<span class="accom-name" style="cursor:default;">${d.accom.name}</span>`;
-      const addrLink = d.accom.mapsUrl ?
-        `<a href="${d.accom.mapsUrl}" target="_blank" rel="noopener" class="accom-address">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          ${d.accom.address}
-        </a>` : `<span class="accom-address">${d.accom.address}</span>`;
-      const bookedBadge = d.accom.booked ?
-        `<div class="booked-badge">✓ Geboekt</div>` : "";
-
+      const nameLink = d.accom.url
+        ? `<a href="${d.accom.url}" target="_blank" rel="noopener" class="accom-name">${d.accom.name}</a>`
+        : `<span class="accom-name" style="cursor:default;">${d.accom.name}</span>`;
+      const addrLink = d.accom.mapsUrl
+        ? `<a href="${d.accom.mapsUrl}" target="_blank" rel="noopener" class="accom-address"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${d.accom.address}</a>`
+        : `<span class="accom-address">${d.accom.address}</span>`;
+      const bookedBadge = d.accom.booked ? `<div class="booked-badge">✓ Geboekt</div>` : "";
       if (d.isTravel && d.accom.icon === "⛴️") {
-        accomHTML = `<div class="journey-card">
-          <div class="journey-icon">${d.accom.icon}</div>
-          <div>
-            <div class="accom-type">${d.accom.type}</div>
-            ${nameLink}
-            ${addrLink}
-            ${bookedBadge}
-          </div>
-        </div>`;
+        accomHTML = `<div class="journey-card"><div class="journey-icon">${d.accom.icon}</div><div><div class="accom-type">${d.accom.type}</div>${nameLink}${addrLink}${bookedBadge}</div></div>`;
       } else {
-        accomHTML = `<div class="accom-card">
-          <div class="accom-icon" style="background:${phaseIconBg(d.phase)}">${d.accom.icon}</div>
-          <div class="accom-body">
-            <div class="accom-type">${d.accom.type}</div>
-            ${nameLink}
-            ${addrLink}
-            ${bookedBadge}
-          </div>
-        </div>`;
+        accomHTML = `<div class="accom-card"><div class="accom-icon" style="background:${phaseIconBg(d.phase)}">${d.accom.icon}</div><div class="accom-body"><div class="accom-type">${d.accom.type}</div>${nameLink}${addrLink}${bookedBadge}</div></div>`;
       }
     }
 
-    // Travel info chips
+    // Travel chip
     let travelHTML = "";
     if (d.isTravel && d.travelTime) {
       const linkPart = d.travelLink
         ? `<a href="${d.travelLink}" target="_blank" rel="noopener" style="color:var(--fjord);font-weight:500;">${d.travelTime}</a>`
         : `<span class="travel-chip-val">${d.travelTime}</span>`;
-      travelHTML = `<div class="travel-strip">
-        <div class="travel-chip">
-          <span class="travel-chip-icon">${d.travelIcon}</span>
-          <div>
-            <span class="travel-chip-label">Reistijd</span>
-            ${linkPart}
-          </div>
-        </div>
-      </div>`;
+      travelHTML = `<div class="travel-strip"><div class="travel-chip"><span class="travel-chip-icon">${d.travelIcon}</span><div><span class="travel-chip-label">Reistijd</span>${linkPart}</div></div></div>`;
     }
 
     // More link
     const moreLinkHTML = d.moreLink
-      ? `<a href="${d.moreLink}" target="_blank" rel="noopener" class="more-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-          Meer activiteiten
-        </a>` : "";
+      ? `<a href="${d.moreLink}" target="_blank" rel="noopener" class="more-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Meer activiteiten</a>`
+      : "";
+
+    // ── Next buttons ──────────────────────────────────────────────
+    const isLast = i === days.length - 1;
+    const nextDay = isLast ? null : days[i + 1];
+
+    const heroNextHTML = isLast ? "" : `
+      <button class="hero-next" onclick="goToDay(${i + 1})">
+        Volgende
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>`;
+
+    const bottomNextHTML = isLast ? "" : `
+      <div class="day-next-wrap">
+        <button class="day-next" onclick="goToDay(${i + 1}); window.scrollTo({top:0,behavior:'smooth'})">
+          <div>
+            <span class="day-next-label">Volgende dag</span>
+            <span class="day-next-dest">${nextDay.date} &nbsp;·&nbsp; ${nextDay.place}</span>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>`;
 
     page.innerHTML = `
       <div class="hero">
@@ -1370,6 +367,7 @@ function buildMain() {
           <div class="hero-place">${d.place}</div>
           <span class="hero-phase-badge badge-${d.phase}">${d.phaseLabel}</span>
         </div>
+        ${heroNextHTML}
       </div>
       <div class="day-content">
         ${travelHTML}
@@ -1380,6 +378,7 @@ function buildMain() {
           <p class="activity-text">${d.activities}</p>
           ${moreLinkHTML}
         </div>
+        ${bottomNextHTML}
       </div>`;
 
     main.appendChild(page);
@@ -1387,34 +386,21 @@ function buildMain() {
 }
 
 function phaseIconBg(phase) {
-  const map = {
-    reis: "#f0f4f8", bergen: "#e3f0fd", bald: "#e8f5e9",
-    vik: "#f3e5f5", flam: "#e3f2fd", oslo: "#fbe9e7"
-  };
+  const map = { reis:"#f0f4f8", bergen:"#e3f0fd", bald:"#e8f5e9", vik:"#f3e5f5", flam:"#e3f2fd", oslo:"#fbe9e7" };
   return map[phase] || "#f0f4f8";
 }
 
 function goToDay(i) {
-  const prev = document.getElementById("day-" + currentDay);
-  const next = document.getElementById("day-" + i);
-  if (prev) prev.classList.remove("active");
-  if (next) next.classList.add("active");
-
-  const prevNav = document.getElementById("nav-" + currentDay);
+  document.getElementById("day-" + currentDay)?.classList.remove("active");
+  document.getElementById("day-" + i)?.classList.add("active");
+  document.getElementById("nav-" + currentDay)?.classList.remove("active");
   const nextNav = document.getElementById("nav-" + i);
-  if (prevNav) prevNav.classList.remove("active");
-  if (nextNav) nextNav.classList.add("active");
-
-  // Update dest buttons
+  nextNav?.classList.add("active");
   document.querySelectorAll(".dest-btn").forEach(b => b.classList.remove("active"));
-  const destBtn = document.getElementById("dest-" + days[i].phase);
-  if (destBtn) destBtn.classList.add("active");
-
+  document.getElementById("dest-" + days[i].phase)?.classList.add("active");
   currentDay = i;
   window.scrollTo({ top: 0, behavior: "smooth" });
-
-  // Scroll nav item into view
-  if (nextNav) nextNav.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  nextNav?.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
 
 function switchView(view) {
@@ -1441,7 +427,6 @@ function closeSidebar() {
   document.getElementById("overlay").classList.remove("show");
 }
 
-// Init — start with sidebar collapsed
 buildSidebar();
 buildMain();
 document.getElementById("sidebar").classList.add("collapsed");

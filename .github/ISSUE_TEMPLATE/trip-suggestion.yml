@@ -1,0 +1,51 @@
+name: Trip suggestion
+description: Restaurant or activity tip for the Noorwegen 2026 trip site
+title: "[City] "
+labels:
+  - suggestion
+  - pending
+body:
+  - type: textarea
+    id: raw
+    attributes:
+      label: Suggestion
+      description: What was recommended? Name, why it's nice, any context.
+      placeholder: "Bryggeloftet — traditionele Noorse gerechten aan Bryggen"
+    validations:
+      required: true
+  - type: dropdown
+    id: city
+    attributes:
+      label: City
+      options:
+        - Hamburg
+        - Bergen
+        - Baldersheim
+        - Vik
+        - Flåm
+        - Oslo
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - restaurant
+        - activity
+    validations:
+      required: true
+  - type: input
+    id: day_id
+    attributes:
+      label: Day id (optional)
+      description: "Leave blank to let the agent pick. Hamburg=0, Bergen=2, Baldersheim=4, Vik=8, Flåm=12, Oslo=17"
+      placeholder: "2"
+  - type: checkboxes
+    id: vetted
+    attributes:
+      label: Curation
+      options:
+        - label: Personally vetted (do not add AI tag)
+          required: false

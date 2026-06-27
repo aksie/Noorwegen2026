@@ -98,9 +98,15 @@
   .journey-card { background: var(--fjord); border-radius: 16px; padding: 28px 32px; margin-bottom: 40px; color: #fff; display: flex; gap: 20px; align-items: center; }
   .journey-icon { font-size: 36px; flex-shrink: 0; }
   .section-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-  .activities-block { margin-bottom: 36px; }
+  .activities-block, .restaurants-block { margin-bottom: 36px; }
+  .activity-list, .restaurant-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
   .activity-text { font-size: 16px; line-height: 1.75; color: var(--ink); font-weight: 300; }
   .activity-text strong { color: var(--fjord); font-weight: 500; }
+  .activity-text a, .restaurant-list a { color: var(--fjord); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+  .activity-text a:hover, .restaurant-list a:hover { color: var(--gold); }
+  .restaurant-list li { position: relative; padding-left: 18px; }
+  .restaurant-list li::before { content: "◆"; position: absolute; left: 0; top: 2px; font-size: 10px; color: var(--gold); }
+  .ai-badge { display: inline-block; margin-left: 8px; padding: 2px 7px; border-radius: 4px; background: rgba(107,114,128,.12); color: var(--rock); font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: .8px; vertical-align: middle; }
   .more-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 11px 20px; border-radius: 8px; background: var(--glacier); color: var(--fjord); text-decoration: none; font-size: 13px; font-weight: 500; transition: all .2s; border: 1px solid rgba(26,58,74,.08); }
   .more-link:hover { background: var(--fjord); color: #fff; }
   .booked-badge { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; padding: 4px 10px; border-radius: 20px; background: rgba(74,124,89,.1); color: var(--moss); font-size: 11px; font-weight: 500; font-family: 'DM Mono', monospace; }
@@ -215,6 +221,41 @@ let phaseGroups = [];
 let currentDay = 0;
 let sidebarOpen = false;
 let currentView = "dates";
+
+function renderMarkdown(text) {
+  if (!text) return "";
+  const escaped = String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  return escaped
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*([^*]+)\*/g, "<em>$1</em>");
+}
+
+function normalizeActivities(day) {
+  if (Array.isArray(day.activities)) return day.activities;
+  if (typeof day.activities === "string") return [day.activities];
+  return [];
+}
+
+function renderActivitiesHTML(day, moreLinkHTML = "") {
+  const items = normalizeActivities(day).map(a => `<li class="activity-text">${renderMarkdown(a)}</li>`).join("");
+  if (!items) return moreLinkHTML;
+  return `<div class="activities-block"><div class="section-title">Programma</div><ul class="activity-list">${items}</ul>${moreLinkHTML}</div>`;
+}
+
+function renderRestaurantsHTML(day) {
+  if (!Array.isArray(day.restaurants) || !day.restaurants.length) return "";
+  const items = day.restaurants.map(r => {
+    const isAi = /\s·\sAI\s*$/.test(r);
+    const text = isAi ? r.replace(/\s·\sAI\s*$/, "") : r;
+    const badge = isAi ? '<span class="ai-badge">AI</span>' : "";
+    return `<li class="activity-text">${renderMarkdown(text)}${badge}</li>`;
+  }).join("");
+  return `<div class="restaurants-block"><div class="section-title">Restaurants</div><ul class="restaurant-list">${items}</ul></div>`;
+}
 
 function enterSite() {
   const landing = document.getElementById("landing");
@@ -332,11 +373,8 @@ function buildMain() {
         ${travelHTML}
         ${accomHTML}
         ${d.accom ? '<div class="divider"></div>' : ''}
-        <div class="activities-block">
-          <div class="section-title">Programma</div>
-          <p class="activity-text">${d.activities}</p>
-          ${moreLinkHTML}
-        </div>
+        ${renderActivitiesHTML(d, moreLinkHTML)}
+        ${renderRestaurantsHTML(d)}
         ${bottomNextHTML}
       </div>`;
 

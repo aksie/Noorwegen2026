@@ -21,10 +21,18 @@
         "icon": "🏨",
         "booked": true
       },
-      "activities": "Vertrek Amsterdam vroeg. Rijden naar Hamburg (~5 uur). Middag en avond Hamburg verkennen: de <strong>Speicherstadt</strong> (UNESCO historisch havendistrict), de <strong>Reeperbahn</strong> en een wandeling langs de <strong>Alster</strong>.",
+      "activities": [
+        "Vertrek Amsterdam vroeg. Rijden naar Hamburg (~5 uur).",
+        "Middag en avond Hamburg verkennen: de **Speicherstadt** (UNESCO historisch havendistrict), de **Reeperbahn** en een wandeling langs de **Alster**."
+      ],
       "moreLink": null,
       "heroImage": "images/auto_01.jpg",
-      "heroAlt": "Hamburg"
+      "heroAlt": "Hamburg",
+      "restaurants": [
+        "[Clouds](https://www.clouds-hamburg.de/) — sky bar & fine dining in de Elbphilharmonie · AI",
+        "[Block House Am Michel](https://www.block-house.de/) — betrouwbaar steakhouse bij de Michel · AI",
+        "[Fischereihafen Restaurant](https://www.fischereihafen-restaurant.de/) — klassieke viskeuken in de haven · AI"
+      ]
     },
     {
       "id": 1,
@@ -47,7 +55,9 @@
         "icon": "⛴️",
         "booked": true
       },
-      "activities": "Vroeg vertrek Hamburg. Rijden naar <strong>Hirtshals</strong> (~4,5 uur). Inchecken Fjord Line — houd rekening met 2 uur voor vertrek voor check-in met auto. De ferry vertrekt rond <strong>19:15</strong> en arriveert de volgende ochtend om ~13:00 in Bergen.",
+      "activities": [
+        "Vroeg vertrek Hamburg. Rijden naar **Hirtshals** (~4,5 uur). Inchecken Fjord Line — houd rekening met 2 uur voor vertrek voor check-in met auto. De ferry vertrekt rond **19:15** en arriveert de volgende ochtend om ~13:00 in Bergen."
+      ],
       "moreLink": null,
       "heroImage": "images/bergenferry.jpg",
       "heroAlt": "Ferry"
@@ -73,10 +83,17 @@
         "icon": "🏨",
         "booked": false
       },
-      "activities": "Aankomst Bergen ~13:00. Inchecken hotel. 's Middags een eerste verkenning van <strong>Bryggen</strong> — de kleurrijke UNESCO-hanzehuizen aan de haven. Ga na 17:00 voor minder drukte. Avondeten in de haven.",
+      "activities": [
+        "Aankomst Bergen ~13:00. Inchecken hotel. 's Middags een eerste verkenning van **Bryggen** — de kleurrijke UNESCO-hanzehuizen aan de haven. Ga na 17:00 voor minder drukte. Avondeten in de haven."
+      ],
       "moreLink": null,
       "heroImage": "images/Bergen.jpg",
-      "heroAlt": "Bergen"
+      "heroAlt": "Bergen",
+      "restaurants": [
+        "[Bryggeloftet & Stuene](https://bryggeloftet.no/) — traditionele Noorse gerechten aan Bryggen · AI",
+        "[Enhjørningen Fisk](https://enhjorningen.no/) — visrestaurant in historisch pakhuizen · AI",
+        "[Bare Restaurant](https://barerestaurant.no/) — Michelin-ster, reserveren verplicht · AI"
+      ]
     },
     {
       "id": 3,
@@ -99,7 +116,11 @@
         "icon": "🏨",
         "booked": false
       },
-      "activities": "Ochtend: <strong>Ulrikenbanen kabelbaan</strong> naar Bergen's hoogste berg (643m) — restaurant aan de top. Middag: <strong>Old Bergen Museum</strong> met meer dan 50 historische houten huizen en acteurs in 19e-eeuwse kostuums. Avond: <strong>Troldhaugen</strong>, het prachtige huis van componist Edvard Grieg met uitzicht over het Nordåsmeer.",
+      "activities": [
+        "Ochtend: **Ulrikenbanen kabelbaan** naar Bergen's hoogste berg (643m) — restaurant aan de top.",
+        "Middag: **Old Bergen Museum** met meer dan 50 historische houten huizen en acteurs in 19e-eeuwse kostuums.",
+        "Avond: **Troldhaugen**, het prachtige huis van componist Edvard Grieg met uitzicht over het Nordåsmeer."
+      ],
       "moreLink": null,
       "heroImage": "images/Bergen.jpg",
       "heroAlt": "Bergen"
@@ -125,7 +146,9 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "Rijdag ~1,5 uur van Bergen. Optionele tussenstop bij de middeleeuwse <strong>Lysekloster kloosterruïne</strong>. Inchecken in het huisje in de oude bakkerij aan het Bjørnafjord.",
+      "activities": [
+        "Rijdag ~1,5 uur van Bergen. Optionele tussenstop bij de middeleeuwse **Lysekloster kloosterruïne**. Inchecken in het huisje in de oude bakkerij aan het Bjørnafjord."
+      ],
       "moreLink": null,
       "heroImage": "images/auto_02.jpg",
       "heroAlt": "Bjørnafjorden"
@@ -151,7 +174,9 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "Rustdag aan het brede, stille Bjørnafjord. Wandelen langs het water, zwemmen, de haven van <strong>Osøyro</strong> verkennen. 's Avonds barbecueën op het terras met uitzicht over het fjord.",
+      "activities": [
+        "Rustdag aan het brede, stille Bjørnafjord. Wandelen langs het water, zwemmen, de haven van **Osøyro** verkennen. 's Avonds barbecueën op het terras met uitzicht over het fjord."
+      ],
       "moreLink": null,
       "heroImage": "images/Bjornafjorden.png",
       "heroAlt": "Bjørnafjorden"
@@ -177,7 +202,9 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "Dagtocht naar het eiland <strong>Lysøen</strong> — het buitenverblijf van de beroemde Noorse violist Ole Bull. Een bootje brengt je naar het eiland met zijn Moorse villa en rustig natuurreservaat. Weinig bezocht, indrukwekkend mooi.",
+      "activities": [
+        "Dagtocht naar het eiland **Lysøen** — het buitenverblijf van de beroemde Noorse violist Ole Bull. Een bootje brengt je naar het eiland met zijn Moorse villa en rustig natuurreservaat. Weinig bezocht, indrukwekkend mooi."
+      ],
       "moreLink": "https://lysoen.no",
       "heroImage": "images/Bjornafjorden.png",
       "heroAlt": "Bjørnafjorden"
@@ -203,7 +230,9 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "Dagtocht naar het <strong>Hardangerfjord</strong> (~1u rijden via Norheimsund). Tussenstop <strong>Stegastein uitkijkpunt</strong> (650m boven het fjord). Verder naar <strong>Eidfjord</strong> en de iconische <strong>Vøringsfossen</strong> waterval. Optioneel: fjordcruise boot vanaf Norheimsund (vertrek 09:00, terug 18:15).",
+      "activities": [
+        "Dagtocht naar het **Hardangerfjord** (~1u rijden via Norheimsund). Tussenstop **Stegastein uitkijkpunt** (650m boven het fjord). Verder naar **Eidfjord** en de iconische **Vøringsfossen** waterval. Optioneel: fjordcruise boot vanaf Norheimsund (vertrek 09:00, terug 18:15)."
+      ],
       "moreLink": "https://www.norled.no/en/fjordcruise/hardangerfjord-from-norheimsund/",
       "heroImage": "images/Bjornafjorden.png",
       "heroAlt": "Hardangerfjord"
@@ -229,7 +258,9 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "Rijdag ~3,5 uur via het Lærdal-dal. Tussenstop bij <strong>Borgund Stavkerk</strong> — de meest authentieke en gave stavkerk van Noorwegen (±45 min omweg waard). Inchecken in het huisje bij Vik aan de Sognefjord.",
+      "activities": [
+        "Rijdag ~3,5 uur via het Lærdal-dal. Tussenstop bij **Borgund Stavkerk** — de meest authentieke en gave stavkerk van Noorwegen (±45 min omweg waard). Inchecken in het huisje bij Vik aan de Sognefjord."
+      ],
       "moreLink": null,
       "heroImage": "images/auto_01.jpg",
       "heroAlt": "auto_01"
@@ -255,10 +286,16 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "<strong>Hopperstad Stavkerk</strong> bezoeken — gebouwd rond 1130, nog op de originele plek en een van de oudste stavkerken van Noorwegen. Combipakket met de nabijgelegen <strong>Hove Steenkerk</strong> (1170 AD, 2 km verderop). Aansluitend: <strong>Gamalosten kaasproeverij</strong> bij de TINE Dairy in het centrum van Vik.",
+      "activities": [
+        "**Hopperstad Stavkerk** bezoeken — gebouwd rond 1130, nog op de originele plek en een van de oudste stavkerken van Noorwegen. Combipakket met de nabijgelegen **Hove Steenkerk** (1170 AD, 2 km verderop). Aansluitend: **Gamalosten kaasproeverij** bij de TINE Dairy in het centrum van Vik."
+      ],
       "moreLink": "https://www.stavechurch.com",
       "heroImage": "images/Sognefjord.png",
-      "heroAlt": "Sognefjord"
+      "heroAlt": "Sognefjord",
+      "restaurants": [
+        "[Vikja Cafe](https://maps.google.com/?q=Vikja+Cafe+Vik+Norway) — lunch en koffie in het centrum · AI",
+        "[Hopperstad kafé](https://maps.google.com/?q=Hopperstad+Stave+Church+Vik) — simpel eten bij de stavkerk · AI"
+      ]
     },
     {
       "id": 10,
@@ -281,7 +318,9 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "<strong>RIB-tocht op de Sognefjord</strong> met Vik Adventure (vertrek 13:00). Vaar naar de verborgen <strong>Arnafjord</strong>, het stille <strong>Finnafjord</strong> en het eiland <strong>Kvamsøy</strong> — het kleinste eiland ter wereld met een eigen kerk. ~3 uur, gids inclusief.",
+      "activities": [
+        "**RIB-tocht op de Sognefjord** met Vik Adventure (vertrek 13:00). Vaar naar de verborgen **Arnafjord**, het stille **Finnafjord** en het eiland **Kvamsøy** — het kleinste eiland ter wereld met een eigen kerk. ~3 uur, gids inclusief."
+      ],
       "moreLink": "https://vikadventure.no",
       "heroImage": "images/Sognefjord.png",
       "heroAlt": "Sognefjord"
@@ -307,7 +346,10 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "Ochtend: <strong>Ovriseggi wandeling</strong> op het Vikafjellet plateau — een ontspannen ridge walk met spectaculair uitzicht over de Sognefjord, Vik en de overkant richting Balestrand. Middag: dagtocht naar <strong>Balestrand</strong> (pont of rijden) voor de Vikingstandbeelden bij Vangsnes, St. Olaf kerk en de fruitparkwinkel.",
+      "activities": [
+        "Ochtend: **Ovriseggi wandeling** op het Vikafjellet plateau — een ontspannen ridge walk met spectaculair uitzicht over de Sognefjord, Vik en de overkant richting Balestrand.",
+        "Middag: dagtocht naar **Balestrand** (pont of rijden) voor de Vikingstandbeelden bij Vangsnes, St. Olaf kerk en de fruitparkwinkel."
+      ],
       "moreLink": null,
       "heroImage": "images/Sognefjord.png",
       "heroAlt": "Sognefjord"
@@ -333,7 +375,10 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "Rijdag ~2 uur via Aurland naar Flåm. Inchecken in het huisje aan het Aurlandsfjord. Avond: <strong>Ægir Brouwerijpub</strong> in Flåm — Vikinggeïnspireerd menu met huisbieren in een geweldig sfeervolle brouwerij.",
+      "activities": [
+        "Rijdag ~2 uur via Aurland naar Flåm. Inchecken in het huisje aan het Aurlandsfjord.",
+        "Avond: **Ægir Brouwerijpub** in Flåm — Vikinggeïnspireerd menu met huisbieren in een geweldig sfeervolle brouwerij."
+      ],
       "moreLink": "https://aegirbrygghus.no",
       "heroImage": "images/auto_02.jpg",
       "heroAlt": "Auto_02"
@@ -359,10 +404,17 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "De <strong>Flåmsbana</strong> — één van de mooiste en steilste spoorwegen ter wereld. 20 km, 20 tunnels (18 met de hand uitgehouwen), hoogteverschil van 864m. De trein maakt een fotostop bij de majesteuze <strong>Kjosfossen waterval</strong>. Boek vroeg voor de beste tijden.",
+      "activities": [
+        "De **Flåmsbana** — één van de mooiste en steilste spoorwegen ter wereld. 20 km, 20 tunnels (18 met de hand uitgehouwen), hoogteverschil van 864m. De trein maakt een fotostop bij de majesteuze **Kjosfossen waterval**. Boek vroeg voor de beste tijden."
+      ],
       "moreLink": "https://www.norwaysbest.com/en/flam/things-to-do",
       "heroImage": "images/Flam.png",
-      "heroAlt": "Flåm"
+      "heroAlt": "Flåm",
+      "restaurants": [
+        "[Ægir BrewPub](https://aegirbrygghus.no/) — brouwerij met Viking-menu (ook avond dag 16) · AI",
+        "[Flåm Bakery](https://maps.google.com/?q=Flam+Bakery) — brood, zandwiches en zoet voor onderweg · AI",
+        "[Flåm Marina Restaurant](https://maps.google.com/?q=Flam+Marina+Restaurant) — uitzicht over de fjord · AI"
+      ]
     },
     {
       "id": 14,
@@ -385,7 +437,9 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "<strong>Nærøyfjord cruise</strong> met het stille, elektrische schip <em>Future of the Fjords</em>. Twee uur varen door de UNESCO-beschermde smalle fjord van Flåm naar Gudvangen. Optie: in Gudvangen uitstappen voor een bezoek aan het Vikingdorp <strong>Njardarheimr</strong> en het spectaculaire uitzicht vanaf het Stalheim Hotel.",
+      "activities": [
+        "**Nærøyfjord cruise** met het stille, elektrische schip *Future of the Fjords*. Twee uur varen door de UNESCO-beschermde smalle fjord van Flåm naar Gudvangen. Optie: in Gudvangen uitstappen voor een bezoek aan het Vikingdorp **Njardarheimr** en het spectaculaire uitzicht vanaf het Stalheim Hotel."
+      ],
       "moreLink": "https://www.norwaysbest.com/en/flam/things-to-do",
       "heroImage": "images/Flam.png",
       "heroAlt": "Flåm"
@@ -411,7 +465,9 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "Actieve dag: <strong>Trein + Wandel + Fiets combo</strong>. Neem de Flåmsbana omhoog naar Vatnahalsen of Myrdal. Wandel 3,5 km naar beneden langs 21 haarspeldbochten. Fiets dan 17 km terug naar Flåm via de historische <strong>Rallarvegen</strong>. Een onvergetelijke combinatie van trein, natuur en beweging.",
+      "activities": [
+        "Actieve dag: **Trein + Wandel + Fiets combo**. Neem de Flåmsbana omhoog naar Vatnahalsen of Myrdal. Wandel 3,5 km naar beneden langs 21 haarspeldbochten. Fiets dan 17 km terug naar Flåm via de historische **Rallarvegen**. Een onvergetelijke combinatie van trein, natuur en beweging."
+      ],
       "moreLink": "https://www.norwaysbest.com/en/flam/things-to-do",
       "heroImage": "images/Flam.png",
       "heroAlt": "Flåm"
@@ -437,7 +493,10 @@
         "icon": "🏠",
         "booked": true
       },
-      "activities": "Vroeg naar het <strong>Stegastein uitkijkpunt</strong> — 650m boven Aurland, 30m uitstekend platform boven het fjord. Daarna de <strong>Mt. Prest wandeling</strong> met shuttle vanaf Flåm voor een panoramisch uitzicht over de Aurlandsfjord. Avond: <strong>The Fjord Farm</strong> voor lokale proeverijen en een intiem concert met Noors volksmuziek.",
+      "activities": [
+        "Vroeg naar het **Stegastein uitkijkpunt** — 650m boven Aurland, 30m uitstekend platform boven het fjord. Daarna de **Mt. Prest wandeling** met shuttle vanaf Flåm voor een panoramisch uitzicht over de Aurlandsfjord.",
+        "Avond: **The Fjord Farm** voor lokale proeverijen en een intiem concert met Noors volksmuziek."
+      ],
       "moreLink": "https://www.norwaysbest.com/en/flam/things-to-do",
       "heroImage": "images/Flam.png",
       "heroAlt": "Flåm"
@@ -463,7 +522,9 @@
         "icon": "🏙️",
         "booked": true
       },
-      "activities": "Rijdag ~5 uur. Neem de <strong>rv7 via Hardangervidda</strong> — een van Noorwegens mooiste rijroutes over het hoogplateau. Inchecken in het appartement in <strong>Grünerløkka</strong>, het bruisende creatieve hart van Oslo.",
+      "activities": [
+        "Rijdag ~5 uur. Neem de **rv7 via Hardangervidda** — een van Noorwegens mooiste rijroutes over het hoogplateau. Inchecken in het appartement in **Grünerløkka**, het bruisende creatieve hart van Oslo."
+      ],
       "moreLink": null,
       "heroImage": "images/auto_01.jpg",
       "heroAlt": "Oslo Grünerløkka"
@@ -489,10 +550,19 @@
         "icon": "🏙️",
         "booked": true
       },
-      "activities": "Ochtend: <strong>Bygdøy</strong> — de Vikingschepen (pre-boeken!) en het Fram Museum. Middag: het enorme <strong>Vigeland Sculpturenpark</strong> met 212 bronzen en granieten sculpturen (gratis toegang). Avond: terug in de eigen wijk voor <strong>Mathallen</strong> foodmarkt en een wandeling langs <strong>Thorvald Meyers gate</strong>.",
+      "activities": [
+        "Ochtend: **Bygdøy** — de Vikingschepen (pre-boeken!) en het Fram Museum.",
+        "Middag: het enorme **Vigeland Sculpturenpark** met 212 bronzen en granieten sculpturen (gratis toegang).",
+        "Avond: terug in de eigen wijk voor **Mathallen** foodmarkt en een wandeling langs **Thorvald Meyers gate**."
+      ],
       "moreLink": "https://www.norwaysbest.com/en/inspiration/24-hours-in-oslo-discover-norway-s-capital-in-a-day",
       "heroImage": "images/oslo_huisje.jpg",
-      "heroAlt": "Oslo"
+      "heroAlt": "Oslo",
+      "restaurants": [
+        "[Mathallen Oslo](https://mathallen.no/) — food hall met veel stalls (Grünerløkka) · AI",
+        "[Lofoten Fiskerestaurant](https://www.lofoten-fiskerestaurant.no/) — verse vis aan Aker Brygge · AI",
+        "[Villa Paradiso Grünerløkka](https://villaparadiso.no/) — pizza en pasta in de buurt van het appartement · AI"
+      ]
     },
     {
       "id": 19,
@@ -515,7 +585,9 @@
         "icon": "🏙️",
         "booked": true
       },
-      "activities": "Vrije dag in Oslo naar eigen inzicht. Opties: <strong>Munch Museum</strong> (The Scream), het dak van de <strong>Oslo Opera House</strong> (gratis uitzicht over de Oslofjord), <strong>Sørenga Seawater Pool</strong> — een buitenzwembad direct aan het fjord. Of gewoon relaxen in de eigen wijk Grünerløkka.",
+      "activities": [
+        "Vrije dag in Oslo naar eigen inzicht. Opties: **Munch Museum** (The Scream), het dak van de **Oslo Opera House** (gratis uitzicht over de Oslofjord), **Sørenga Seawater Pool** — een buitenzwembad direct aan het fjord. Of gewoon relaxen in de eigen wijk Grünerløkka."
+      ],
       "moreLink": "https://www.norwaysbest.com/en/inspiration/24-hours-in-oslo-discover-norway-s-capital-in-a-day",
       "heroImage": "images/oslo_huisje.jpg",
       "heroAlt": "Oslo Opera"
@@ -541,7 +613,9 @@
         "icon": "⛴️",
         "booked": true
       },
-      "activities": "Ochtend vrij in Oslo. Optie: <strong>Munch Museum</strong> of een wandeling over het dak van de Oslo Opera. Zorg dat je om <strong>12:00 ingecheckt</strong> bent bij de terminal met de auto. <strong>Color Line boot vertrekt om 14:00</strong>. Aankomst Kiel de volgende ochtend om ~10:00.",
+      "activities": [
+        "Ochtend vrij in Oslo. Optie: **Munch Museum** of een wandeling over het dak van de Oslo Opera. Zorg dat je om **12:00 ingecheckt** bent bij de terminal met de auto. **Color Line boot vertrekt om 14:00**. Aankomst Kiel de volgende ochtend om ~10:00."
+      ],
       "moreLink": null,
       "heroImage": "images/osloferrry.jpg",
       "heroAlt": "Ferry Oslo Kiel"
@@ -559,7 +633,9 @@
       "travelTime": "~6 uur rijden",
       "travelLink": null,
       "accom": null,
-      "activities": "Aankomst Kiel ~10:00. Rijden naar Amsterdam (~6 uur). <strong>Thuis! 🇳🇱</strong>",
+      "activities": [
+        "Aankomst Kiel ~10:00. Rijden naar Amsterdam (~6 uur). **Thuis! 🇳🇱**"
+      ],
       "moreLink": null,
       "heroImage": "images/auto_02.jpg",
       "heroAlt": "Thuisreis"
@@ -577,7 +653,9 @@
       "travelTime": null,
       "travelLink": null,
       "accom": null,
-      "activities": "Rustdag. Was en uitpakken. Foto's bekijken. Herinneringen ophalen. <strong>Tot de volgende keer, Noorwegen.</strong> 🇳🇴",
+      "activities": [
+        "Rustdag. Was en uitpakken. Foto's bekijken. Herinneringen ophalen. **Tot de volgende keer, Noorwegen.** 🇳🇴"
+      ],
       "moreLink": null,
       "heroImage": "images/thuis_02.jpg",
       "heroAlt": "Thuis"
